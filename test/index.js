@@ -25,18 +25,74 @@ describe('docker', function () {
     var docker = new Docker({ a: 'a' });
     assert.isNotNull(docker);
     assert.equal(docker.a, 'a');
-    console.log('docker', docker);
+    //console.log('docker', docker);
   });
 
 
 
-  it('should merge opts', function (done) {
+  it('command info2 should fail', function (done) {
     var docker = new Docker({ machinename: config.DockerMachineName });
-    console.log('docker', docker);
+    //console.log('docker', docker);
     assert.isNotNull(docker);
-    docker.command('test').then(function (data) {
-      console.log('data2', data);
-      console.log('docker2', docker);
+    var failed = false;
+    var err = null;
+    docker.command('info2').then(function (data) {
+      //console.log('data = ', data);
+      assert.isNotNull(data);
+    }).catch(function (error) {
+      assert.isNotNull(error);
+      err = error;
+      failed = true;
+      //console.log('error = ', error);
+    }).finally(function () {
+      //console.log('finally ');
+      assert.isTrue(failed);
+      assert.isNotNull(err);
+      done();
+    });
+  });
+
+  it('command info should pass', function (done) {
+    var docker = new Docker({ machinename: config.DockerMachineName });
+    //console.log('docker', docker);
+    assert.isNotNull(docker);
+    var failed = false;
+    var err = null;
+    docker.command('info').then(function (data) {
+      //console.log('data = ', data);
+      assert.isNotNull(data);
+    }).catch(function (error) {
+      assert.isNotNull(error);
+      err = error;
+      failed = true;
+      //console.log('error = ', error);
+    }).finally(function () {
+      //console.log('finally ');
+      assert.isFalse(failed);
+      assert.isNull(err);
+      done();
+    });
+  });
+
+
+  it('command build should pass', function (done) {
+    var docker = new Docker({ machinename: config.DockerMachineName });
+    //console.log('docker', docker);
+    assert.isNotNull(docker);
+    var failed = false;
+    var err = null;
+    docker.command('images').then(function (data) {
+      console.log('data = ', data);
+      assert.isNotNull(data);
+    }).catch(function (error) {
+      assert.isNotNull(error);
+      err = error;
+      failed = true;
+      //console.log('error = ', error);
+    }).finally(function () {
+      //console.log('finally ');
+      assert.isFalse(failed);
+      assert.isNull(err);
       done();
     });
   });
