@@ -2,7 +2,7 @@
   "name": "docker-cli-js",
   "version": "0.0.1",
   "description": "A wrapper for the docker CLI",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,5 +18,19 @@
   "bugs": {
     "url": "https://github.com/Quobject/docker-cli-js/issues"
   },
-  "homepage": "https://github.com/Quobject/docker-cli-js"
+  "homepage": "https://github.com/Quobject/docker-cli-js",
+  "devDependencies": {
+    "grunt-shell": "~1.1.2",
+    "grunt": "~0.4.5",
+    "grunt-contrib-jshint": "~0.11.3",
+    "mocha": "~2.3.3",
+    "grunt-mocha-test": "~0.12.7",
+    "should": "~7.1.0",
+    "grunt-contrib-copy": "~0.8.1",
+    "grunt-contrib-clean": "~0.6.0",
+    "chai": "~3.3.0",
+    "dockermachine": "0.0.5"
+  },
+  "dependencies": {
+  }
 }
