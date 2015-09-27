@@ -35,8 +35,8 @@ DockerMachine.prototype.config = function (name, callback) {
     //var str = '';
     //console.log('str = ', str);
 
-    var extractValue = function (strp, name) {
-      var re = new RegExp("--" + name +"=\"([\\S]*)\"",'i');
+    var extractValue = function (strp, name, rep) {
+      var re = rep || new RegExp("--" + name +"=\"([\\S]*)\"",'i');
       var m;
 
       if ((m = re.exec(strp)) !== null) {
@@ -67,7 +67,10 @@ DockerMachine.prototype.config = function (name, callback) {
       }(str),
       tlscacert: extractValue(str, 'tlscacert'),
       tlscert: extractValue(str, 'tlscert'),
-      tlskey: extractValue(str,'tlskey')
+      tlskey: extractValue(str, 'tlskey'),
+      host: extractValue(str, null, /-H=tcp:\/\/(.*):/),
+      port: extractValue(str, null, /-H=tcp:\/\/.*:(\d*)/),
+
     };
 
     return result;
