@@ -1,0 +1,22 @@
+{
+  "name": "docker-cli-js",
+  "version": "0.0.1",
+  "description": "A wrapper for the docker CLI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Quobject/docker-cli-js.git"
+  },
+  "keywords": [
+    "docker"
+  ],
+  "author": "Matthias Ludwig <mludwig@quobject.io>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Quobject/docker-cli-js/issues"
+  },
+  "homepage": "https://github.com/Quobject/docker-cli-js"
+}
