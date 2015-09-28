@@ -22,6 +22,8 @@ var Docker = require('docker-cli-js');
 
 ## Usage
 
+With promise
+
 ```js
    var docker = new Docker({
      machinename: 'aws_machine01',
@@ -100,6 +102,34 @@ var Docker = require('docker-cli-js');
 //     'Successfully built d57e3a01e674',
 //     '']
 //}
+```
 
+With callback:
+
+```js
+   var docker = new Docker({
+     cwd: 'nginx'
+   });
+
+  docker.command('build -t nginximg1 .', function (err, data) {
+    console.log('data = ', data);
+  });
+
+//data = {
+//  command: 'docker build -t nginximg1 . ',
+//  raw: '["Sending build context to Docker daemon 3.584 kB\\rSending build context to Docker daemon 3.584 kB\\r\\r\\nStep 0 : FROM nginx\\n ---> 6886fb5a9b8d\\nStep 1 : COPY content /usr/share/nginx/html\\n ---> Using cache\\n ---> abdf8a18f0a1\\nSuccessfully built abdf8a18f0a1\\n",""]',
+//  test: 'done',
+//  success: true,
+//  imageId: 'abdf8a18f0a1',
+//  response:
+//   ['Sending build context to Docker daemon 3.584 kB\rSending build context to Docker daemon 3.584 kB\r\r',
+//     'Step 0 : FROM nginx',
+//     ' ---> 6886fb5a9b8d',
+//     'Step 1 : COPY content /usr/share/nginx/html',
+//     ' ---> Using cache',
+//     ' ---> abdf8a18f0a1',
+//     'Successfully built abdf8a18f0a1',
+//     '']
+//}
 
 ```
