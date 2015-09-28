@@ -132,3 +132,17 @@ With callback:
 //}
 
 ```
+
+* docker run
+
+```js
+docker.command('run --name nginxcont -d -p 80:80 nginximg1', function (err, data) {
+  console.log('data = ', data);
+});
+
+//data = {
+//  command: 'docker run --name nginxcont -d -p 80:80 nginximg1 ',
+//  raw: '["c0df7ad377630bd3bd05fba217e295434fa2d5da03c5216e531a9421530360dc\\n",""]',
+//  containerId: 'c0df7ad377630bd3bd05fba217e295434fa2d5da03c5216e531a9421530360dc'
+//}
+```
