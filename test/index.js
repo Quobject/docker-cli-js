@@ -1,7 +1,7 @@
 ﻿/*global describe, it, before */
 var Docker = require('../lib/index.js');
 //var fs = require('fs');
-//var path = require('path');
+var path = require('path');
 var should = require('chai').should();
 var assert = require('chai').assert;
 
@@ -76,13 +76,17 @@ describe('docker', function () {
 
 
   it('command build should pass', function (done) {
-    var docker = new Docker({ machinename: config.DockerMachineName });
+    this.timeout(15000);
+    var docker = new Docker({
+      machinename: config.DockerMachineName,
+      cwd: path.join(__dirname, 'nginx')
+    });
     //console.log('docker', docker);
     assert.isNotNull(docker);
     var failed = false;
     var err = null;
-    docker.command('images').then(function (data) {
-      console.log('data = ', data);
+    docker.command('build -t nginximg1 .').then(function (data) {
+      //console.log('data = ', data);
       assert.isNotNull(data);
     }).catch(function (error) {
       assert.isNotNull(error);
@@ -97,6 +101,24 @@ describe('docker', function () {
     });
   });
 
+
+  it('command build with callback', function (done) {
+    this.timeout(15000);
+    var docker = new Docker({
+      cwd: path.join(__dirname, 'nginx')
+    });
+    //console.log('docker', docker);
+    assert.isNotNull(docker);
+
+    docker.command('build -t nginximg1 .', function (err, data) {
+      console.log('data = ', data);
+      assert.isNotNull(data);
+      done();
+    });
+  });
+
 });
+
+
 
 
