@@ -1,6 +1,6 @@
 {
   "name": "docker-cli-js",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A wrapper for the docker CLI",
   "main": "lib/index.js",
   "scripts": {
