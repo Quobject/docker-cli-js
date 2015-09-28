@@ -136,7 +136,8 @@ With callback:
 * docker run
 
 ```js
-docker.command('run --name nginxcont -d -p 80:80 nginximg1', function (err, data) {
+
+docker.command('run --name nginxcont -d -p 80:80 nginximg1').then(function (data) {
   console.log('data = ', data);
 });
 
@@ -145,4 +146,26 @@ docker.command('run --name nginxcont -d -p 80:80 nginximg1', function (err, data
 //  raw: '["c0df7ad377630bd3bd05fba217e295434fa2d5da03c5216e531a9421530360dc\\n",""]',
 //  containerId: 'c0df7ad377630bd3bd05fba217e295434fa2d5da03c5216e531a9421530360dc'
 //}
+```
+
+* docker ps
+
+```js
+
+docker.command('ps').then(function (data) {
+  console.log('data = ', data);
+});
+
+
+//data =  { command: 'docker ps ',
+//  raw: '["CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS
+//                  NAMES\\nc0df7ad37763        nginximg1           \\"nginx -g \'daemon off\\"   33 minutes ago      Up 33 minutes       0.0.0.0:80->80/tcp, 443/tcp   nginxcont\\n",""]',
+//containerList:
+//[ { containerId: 'c0df7ad37763',
+//  image: 'nginximg1',
+//  command: '"nginx -g \'daemon off"',
+//  created: '33 minutes ago',
+//  status: 'Up 33 minutes',
+//  ports: '0.0.0.0:80->80/tcp, 443/tcp',
+//  name: 'nginxcont' } ] }
 ```

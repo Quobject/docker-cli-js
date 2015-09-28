@@ -117,7 +117,32 @@ describe('docker', function () {
   //  });
   //});
 
-  it('command run', function (done) {
+  //it('command run', function (done) {
+  //  this.timeout(15000);
+  //  var docker = new Docker({
+  //    machinename: config.DockerMachineName,
+  //  });
+  //  //console.log('docker', docker);
+  //  assert.isNotNull(docker);
+  //  var failed = false;
+  //  var err = null;
+  //  docker.command('run --name nginxcont -d -p 80:80 nginximg1').then(function (data) {
+  //    console.log('data = ', data);
+  //    assert.isNotNull(data);
+  //  }).catch(function (error) {
+  //    assert.isNotNull(error);
+  //    err = error;
+  //    failed = true;
+  //    console.log('error = ', error);
+  //  }).finally(function () {
+  //    console.log('finally ');
+  //    assert.isFalse(failed);
+  //    assert.isNull(err);
+  //    done();
+  //  });
+  //});
+
+  it('command ps', function (done) {
     this.timeout(15000);
     var docker = new Docker({
       //machinename: config.DockerMachineName,
@@ -126,7 +151,7 @@ describe('docker', function () {
     assert.isNotNull(docker);
     var failed = false;
     var err = null;
-    docker.command('run --name nginxcont -d -p 80:80 nginximg1').then(function (data) {
+    docker.command('ps').then(function (data) {
       console.log('data = ', data);
       assert.isNotNull(data);
     }).catch(function (error) {
@@ -141,6 +166,7 @@ describe('docker', function () {
       done();
     });
   });
+
 
 });
 
