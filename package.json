@@ -1,6 +1,6 @@
 {
   "name": "docker-cli-js",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A wrapper for the docker CLI",
   "main": "lib/index.js",
   "scripts": {
@@ -30,7 +30,7 @@
     "dockermachine": "0.0.5"
   },
   "dependencies": {
-    "dockermachineconfig": "~1.0.0",
+    "dockermachineconfig": "~1.0.1",
     "lodash": "~3.10.1",
     "bluebird": "~2.10.1"
   }
