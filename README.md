@@ -118,7 +118,6 @@ With callback:
 //data = {
 //  command: 'docker build -t nginximg1 . ',
 //  raw: '["Sending build context to Docker daemon 3.584 kB\\rSending build context to Docker daemon 3.584 kB\\r\\r\\nStep 0 : FROM nginx\\n ---> 6886fb5a9b8d\\nStep 1 : COPY content /usr/share/nginx/html\\n ---> Using cache\\n ---> abdf8a18f0a1\\nSuccessfully built abdf8a18f0a1\\n",""]',
-//  test: 'done',
 //  success: true,
 //  imageId: 'abdf8a18f0a1',
 //  response:
