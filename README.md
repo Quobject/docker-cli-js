@@ -169,3 +169,86 @@ docker.command('ps').then(function (data) {
 //  ports: '0.0.0.0:80->80/tcp, 443/tcp',
 //  name: 'nginxcont' } ] }
 ```
+
+* docker images
+
+```js
+
+docker.command('images').then(function (data) {
+  console.log('data = ', data);
+});
+
+
+data =  { command: 'docker images ',
+//  raw: '["REPOSITORY             TAG                  IMAGE ID            CREATED             VIRTUAL SIZE\\nquobjectio/consul
+//     0.5.2                c2e8640282e5        5 days ago          37.17 MB\\nquobjectio/consul      0.5.2c               74ae12b3b517        5 days ago          35.92 MB\\n<none>                 <none>               35682216ba6f        6 days ago
+//35.92 MB\\nquobjectio/mongodb     3.0.7                5ca1d18839fb        10 days ago         347 MB\\nquobjectio/mongodb
+//3.0.7d               5ca1d18839fb        10 days ago         347 MB\\nquobjectio/zookeeper   3.4.6-ubuntu-14.04   92eedb07b809        2 weeks ago         369.9 MB\\nswarm                  latest               6b40fe7724bd        2 weeks ago         15.6 MB\\nalpine                 3.2                  8a648f689ddb        9 weeks ago         5.249 MB\\nalpine                 latest               8a648f689ddb        9 weeks ago         5.249 MB\\nubuntu                 latest               91e54dfb1179
+//3 months ago        188.4 MB\\nubuntu                 14.04                8251da35e7a7        3 months ago        188.4 MB\\nubuntu                 15.04                23635bbeb7c5        3 months ago        131.3 MB\\ntutum/mongodb          latest               e27c5e60a8f1        5 months ago        502.6 MB\\n",""]',
+//images:
+//[ { repository: 'quobjectio/consul',
+//  tag: '0.5.2',
+//  'image id': 'c2e8640282e5',
+//  created: '5 days ago',
+//  'virtual size': '37.17 MB' },
+//  { repository: 'quobjectio/consul',
+//    tag: '0.5.2c',
+//    'image id': '74ae12b3b517',
+//    created: '5 days ago',
+//    'virtual size': '35.92 MB' },
+//  { repository: '<none>',
+//    tag: '<none>',
+//    'image id': '35682216ba6f',
+//    created: '6 days ago',
+//    'virtual size': '35.92 MB' },
+//  { repository: 'quobjectio/mongodb',
+//    tag: '3.0.7',
+//    'image id': '5ca1d18839fb',
+//    created: '10 days ago',
+//    'virtual size': '347 MB' },
+//  { repository: 'quobjectio/mongodb',
+//    tag: '3.0.7d',
+//    'image id': '5ca1d18839fb',
+//    created: '10 days ago',
+//    'virtual size': '347 MB' },
+//  { repository: 'quobjectio/zookeeper',
+//    tag: '3.4.6-ubuntu-14.04',
+//    'image id': '92eedb07b809',
+//    created: '2 weeks ago',
+//    'virtual size': '369.9 MB' },
+//  { repository: 'swarm',
+//    tag: 'latest',
+//    'image id': '6b40fe7724bd',
+//    created: '2 weeks ago',
+//    'virtual size': '15.6 MB' },
+//  { repository: 'alpine',
+//    tag: '3.2',
+//    'image id': '8a648f689ddb',
+//    created: '9 weeks ago',
+//    'virtual size': '5.249 MB' },
+//  { repository: 'alpine',
+//    tag: 'latest',
+//    'image id': '8a648f689ddb',
+//    created: '9 weeks ago',
+//    'virtual size': '5.249 MB' },
+//  { repository: 'ubuntu',
+//    tag: 'latest',
+//    'image id': '91e54dfb1179',
+//    created: '3 months ago',
+//    'virtual size': '188.4 MB' },
+//  { repository: 'ubuntu',
+//    tag: '14.04',
+//    'image id': '8251da35e7a7',
+//    created: '3 months ago',
+//    'virtual size': '188.4 MB' },
+//  { repository: 'ubuntu',
+//    tag: '15.04',
+//    'image id': '23635bbeb7c5',
+//    created: '3 months ago',
+//    'virtual size': '131.3 MB' },
+//  { repository: 'tutum/mongodb',
+//    tag: 'latest',
+//    'image id': 'e27c5e60a8f1',
+//    created: '5 months ago',
+//    'virtual size': '502.6 MB' } ] }
+```
