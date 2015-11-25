@@ -135,42 +135,16 @@ describe('docker', function () {
   //  });
   //});
 
-  //it('command ps', function (done) {
-  //  this.timeout(15000);
-  //  var docker = new Docker({
-  //    //machinename: config.DockerMachineName,
-  //  });
-  //  //console.log('docker', docker);
-  //  assert.isNotNull(docker);
-  //  var failed = false;
-  //  var err = null;
-  //  docker.command('ps').then(function (data) {
-  //    console.log('data = ', data);
-  //    assert.isNotNull(data);
-  //  }).catch(function (error) {
-  //    assert.isNotNull(error);
-  //    err = error;
-  //    failed = true;
-  //    console.log('error = ', error);
-  //  }).finally(function () {
-  //    console.log('finally ');
-  //    assert.isFalse(failed);
-  //    assert.isNull(err);
-  //    done();
-  //  });
-  //});
-
-
-  it('command images', function (done) {
+  it('command ps', function (done) {
     this.timeout(15000);
     var docker = new Docker({
-      //machinename: config.DockerMachineName,
+      machinename: config.DockerMachineName,
     });
-    //console.log('docker', docker);
+    console.log('docker', docker);
     assert.isNotNull(docker);
     var failed = false;
     var err = null;
-    docker.command('images').then(function (data) {
+    docker.command('ps').then(function (data) {
       console.log('data = ', data);
       assert.isNotNull(data);
     }).catch(function (error) {
@@ -185,6 +159,32 @@ describe('docker', function () {
       done();
     });
   });
+
+
+  //it('command images', function (done) {
+  //  this.timeout(15000);
+  //  var docker = new Docker({
+  //    //machinename: config.DockerMachineName,
+  //  });
+  //  //console.log('docker', docker);
+  //  assert.isNotNull(docker);
+  //  var failed = false;
+  //  var err = null;
+  //  docker.command('images').then(function (data) {
+  //    console.log('data = ', data);
+  //    assert.isNotNull(data);
+  //  }).catch(function (error) {
+  //    assert.isNotNull(error);
+  //    err = error;
+  //    failed = true;
+  //    console.log('error = ', error);
+  //  }).finally(function () {
+  //    console.log('finally ');
+  //    assert.isFalse(failed);
+  //    assert.isNull(err);
+  //    done();
+  //  });
+  //});
 
 });
 
