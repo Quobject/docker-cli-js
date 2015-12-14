@@ -1,6 +1,6 @@
 {
   "name": "docker-cli-js",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A wrapper for the docker CLI",
   "main": "lib/index.js",
   "scripts": {
@@ -34,6 +34,6 @@
     "bluebird": "~2.10.1",
     "debug": "~2.2.0",
     "cli-table-2-json": "~1.0.0",
-    "dockermachine-cli-js": "1.0.1"
+    "dockermachine-cli-js": "~1.0.2"
   }
 }
