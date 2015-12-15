@@ -253,7 +253,7 @@ docker.command('images').then(function (data) {
 //    'virtual size': '502.6 MB' } ] }
 ```
 
-* docker images
+* docker network ls
 
 ```js
 
