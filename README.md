@@ -179,7 +179,7 @@ docker.command('images').then(function (data) {
 });
 
 
-data =  { command: 'docker images ',
+//data =  { command: 'docker images ',
 //  raw: '["REPOSITORY             TAG                  IMAGE ID            CREATED             VIRTUAL SIZE\\nquobjectio/consul
 //     0.5.2                c2e8640282e5        5 days ago          37.17 MB\\nquobjectio/consul      0.5.2c               74ae12b3b517        5 days ago          35.92 MB\\n<none>                 <none>               35682216ba6f        6 days ago
 //35.92 MB\\nquobjectio/mongodb     3.0.7                5ca1d18839fb        10 days ago         347 MB\\nquobjectio/mongodb
@@ -251,4 +251,50 @@ data =  { command: 'docker images ',
 //    'image id': 'e27c5e60a8f1',
 //    created: '5 months ago',
 //    'virtual size': '502.6 MB' } ] }
+```
+
+* docker images
+
+```js
+
+docker.command('network ls').then(function (data) {
+  console.log('data = ', data);
+});
+
+
+//data = {
+//  command: 'docker network ls ',
+//  raw: '["NETWORK ID          NAME                                      DRIVER\\n4d6a0a35e87f        machine.1.ap-southeast-2.1.0.0.5/none     null                \\n042642d752f4        machine.1.ap-southeast-2.1.0.0.5/host     host                \\n6cc7e229d7c3        machine.1.ap-southeast-2.2.0.0.5/none     null                \\n4a6e627fc1dc        machine.1.ap-southeast-2.2.0.0.5/host     host                \\ne1b70f5af1c8        machine.1.ap-southeast-2.2.0.0.5/bridge   bridge              \\n1f5d449aca44        machine.1.ap-southeast-2.1.0.0.5/bridge   bridge              \\n",""]',
+//  network:
+//   [{
+//     'network id': '4d6a0a35e87f',
+//     name: 'machine.1.ap-southeast-2.1.0.0.5/none',
+//     driver: 'null'
+//   },
+//     {
+//       'network id': '042642d752f4',
+//       name: 'machine.1.ap-southeast-2.1.0.0.5/host',
+//       driver: 'host'
+//     },
+//     {
+//       'network id': '6cc7e229d7c3',
+//       name: 'machine.1.ap-southeast-2.2.0.0.5/none',
+//       driver: 'null'
+//     },
+//     {
+//       'network id': '4a6e627fc1dc',
+//       name: 'machine.1.ap-southeast-2.2.0.0.5/host',
+//       driver: 'host'
+//     },
+//     {
+//       'network id': 'e1b70f5af1c8',
+//       name: 'machine.1.ap-southeast-2.2.0.0.5/bridge',
+//       driver: 'bridge'
+//     },
+//     {
+//       'network id': '1f5d449aca44',
+//       name: 'machine.1.ap-southeast-2.1.0.0.5/bridge',
+//       driver: 'bridge'
+//     }]
+//}
 ```

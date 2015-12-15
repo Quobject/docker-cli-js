@@ -135,30 +135,30 @@ describe('docker', function () {
   //  });
   //});
 
-  it('command ps', function (done) {
-    this.timeout(15000);
-    var docker = new Docker({
-      machinename: config.DockerMachineName,
-    });
-    console.log('docker', docker);
-    assert.isNotNull(docker);
-    var failed = false;
-    var err = null;
-    docker.command('ps').then(function (data) {
-      console.log('data = ', data);
-      assert.isNotNull(data);
-    }).catch(function (error) {
-      assert.isNotNull(error);
-      err = error;
-      failed = true;
-      console.log('error = ', error);
-    }).finally(function () {
-      console.log('finally ');
-      assert.isFalse(failed);
-      assert.isNull(err);
-      done();
-    });
-  });
+  //it('command ps', function (done) {
+  //  this.timeout(15000);
+  //  var docker = new Docker({
+  //    machinename: config.DockerMachineName,
+  //  });
+  //  console.log('docker', docker);
+  //  assert.isNotNull(docker);
+  //  var failed = false;
+  //  var err = null;
+  //  docker.command('ps').then(function (data) {
+  //    console.log('data = ', data);
+  //    assert.isNotNull(data);
+  //  }).catch(function (error) {
+  //    assert.isNotNull(error);
+  //    err = error;
+  //    failed = true;
+  //    console.log('error = ', error);
+  //  }).finally(function () {
+  //    console.log('finally ');
+  //    assert.isFalse(failed);
+  //    assert.isNull(err);
+  //    done();
+  //  });
+  //});
 
 
   //it('command images', function (done) {
@@ -185,6 +185,29 @@ describe('docker', function () {
   //    done();
   //  });
   //});
+
+  it('command network ls', function (done) {
+    this.timeout(15000);
+    var docker = new Docker({});    
+    assert.isNotNull(docker);
+    var failed = false;
+    var err = null;
+    docker.command('--tlsverify --tlscacert="/home/apollo/.docker/machine/certs/ca.pem" --tlscert="/home/apollo/.docker/machine/certs/cert.pem" --tlskey="/home/apollo/.docker/machine/certs/key.pem" -H=tcp://52.62.82.61:3376 network ls').then(function (data) {
+      console.log('data = ', data);
+      assert.isNotNull(data);
+    }).catch(function (error) {
+      assert.isNotNull(error);
+      err = error;
+      failed = true;
+      console.log('error = ', error);
+    }).finally(function () {
+      console.log('finally ');
+      assert.isFalse(failed);
+      assert.isNull(err);
+      done();
+    });
+  });
+
 
 });
 
