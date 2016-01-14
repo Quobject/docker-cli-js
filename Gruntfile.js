@@ -1,5 +1,4 @@
-﻿var mkdirp = require('mkdirp');
-var fs = require('fs');
+﻿var fs = require('fs');
 
 module.exports = function (grunt) {  
   var config = require('./my_config.json');//use config.json as example

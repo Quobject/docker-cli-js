@@ -298,3 +298,205 @@ docker.command('network ls').then(function (data) {
 //     }]
 //}
 ```
+
+* docker inspect 
+```js
+
+docker.command('inspect consul').then(function (data) {
+  console.log('data = ', data);
+});
+
+
+//data =  { command: 'docker inspect consul ',
+//  raw: '["[\\n{\\n    \\"Id\\": \\"2e91854b5dd01a1bb9a8c67757264f32cd512385502f365321771bf669b0ff62\\",\\n    \\"Created\\": \\"2016-01-14T01:53:08.855624531Z\\",\\n    \\"Path\\": \\"/run.sh\\",\\n    \\"Args\\": [\\n        \\"agent\\",\\n        \\"-config-file\\",\\n        \\"/var/consul/config/config.json\\",\\n        \\"-bootstrap\\"\\n    ],\\n
+//  \\"State\\": {\\n        \\"Status\\": \\"running\\",\\n        \\"Running\\": true,\\n        \\"Paused\\": false,\\n        \\"Restarting\\": false,\\n        \\"OOMKilled\\": false,\\n        \\"Dead\\": false,\\n        \\"Pid\\": 1913,\\n        \\"ExitCode\\": 0,\\n        \\"Error\\": \\"\\",\\n        \\"StartedAt\\": \\"2016-01-14T01:53:08.999561111Z\\",\\n        \\"FinishedAt\\": \\"0001-01-01T00:00:00Z\\"\\n    },\\n    \\"Image\\": \\"c2e8640282e5e8c0ed4efbffe661ebc9a3c6819fb3378f54eab6310a3754edc8\\",\\n    \\"ResolvConfPath\\": \\"/var/lib/docker/containers/2e91854b5dd01a1bb9a8c67757264f32cd512385502f365321771bf669b0ff62/resolv.conf\\",\\n    \\"HostnamePath\\": \\"/var/lib/docker/containers/2e91854b5dd01a1bb9a8c67757264f32cd512385502f365321771bf669b0ff62/hostname\\",\\n    \\"HostsPath\\": \\"/var/lib/docker/containers/2e91854b5dd01a1bb9a8c67757264f32cd512385502f365321771bf669b0ff62/hosts\\",\\n    \\"LogPath\\": \\"/var/lib/docker/containers/2e91854b5dd01a1bb9a8c67757264f32cd512385502f365321771bf669b0ff62/2e91854b5dd01a1bb9a8c67757264f32cd512385502f365321771bf669b0ff62-json.log\\",\\n    \\"Name\\": \\"/consul\\",\\n    \\"RestartCount\\": 0,\\n    \\"Driver\\": \\"aufs\\",\\n    \\"ExecDriver\\": \\"native-0.2\\",\\n    \\"MountLabel\\": \\"\\",\\n    \\"ProcessLabel\\": \\"\\",\\n    \\"AppArmorProfile\\": \\"\\",\\n    \\"ExecIDs\\": null,\\n    \\"HostConfig\\": {\\n        \\"Binds\\": [\\n            \\"/fleetmake/data/consul/log:/var/consul/log\\",\\n            \\"/fleetmake/data/consul/data:/var/consul/data\\",\\n            \\"/fleetmake/data/consul/conf:/var/consul/config\\"\\n        ],\\n        \\"ContainerIDFile\\": \\"\\",\\n        \\"LxcConf\\": [],\\n        \\"Memory\\": 0,\\n        \\"MemoryReservation\\": 0,\\n
+//     \\"MemorySwap\\": 0,\\n        \\"KernelMemory\\": 0,\\n        \\"CpuShares\\": 0,\\n        \\"CpuPeriod\\": 0,\\n        \\"CpusetCpus\\": \\"\\",\\n        \\"CpusetMems\\": \\"\\",\\n        \\"CpuQuota\\": 0,\\n        \\"BlkioWeight\\": 0,\\n        \\"OomKillDisable\\": false,\\n        \\"MemorySwappiness\\": -1,\\n        \\"Privileged\\": false,\\n        \\"PortBindings\\": {\\n            \\"8300/tcp\\": [\\n                {\\n                    \\"HostIp\\": \\"\\",\\n                    \\"HostPort\\": \\"8300\\"\\n                }\\n            ],\\n            \\"8301/tcp\\": [\\n                {\\n                    \\"HostIp\\": \\"\\",\\n                    \\"HostPort\\": \\"8301\\"\\n                }\\n            ],\\n            \\"8301/udp\\": [\\n                {\\n
+// \\"HostIp\\": \\"\\",\\n                    \\"HostPort\\": \\"8301\\"\\n                }\\n            ],\\n
+//    \\"8302/tcp\\": [\\n                {\\n                    \\"HostIp\\": \\"\\",\\n                    \\"HostPort\\": \\"8302\\"\\n                }\\n            ],\\n            \\"8302/udp\\": [\\n                {\\n
+//        \\"HostIp\\": \\"\\",\\n                    \\"HostPort\\": \\"8302\\"\\n                }\\n            ],\\n
+//           \\"8400/tcp\\": [\\n                {\\n                    \\"HostIp\\": \\"\\",\\n                    \\"HostPort\\": \\"8400\\"\\n                }\\n            ],\\n            \\"8500/tcp\\": [\\n                {\\n
+//               \\"HostIp\\": \\"\\",\\n                    \\"HostPort\\": \\"8500\\"\\n                }\\n
+//],\\n            \\"8600/tcp\\": [\\n                {\\n                    \\"HostIp\\": \\"\\",\\n
+//  \\"HostPort\\": \\"8600\\"\\n                }\\n            ],\\n            \\"8600/udp\\": [\\n                {\\n                    \\"HostIp\\": \\"\\",\\n                    \\"HostPort\\": \\"8600\\"\\n                }\\n
+//]\\n        },\\n        \\"Links\\": null,\\n        \\"PublishAllPorts\\": false,\\n        \\"Dns\\": [],\\n
+//\\"DnsOptions\\": [],\\n        \\"DnsSearch\\": [],\\n        \\"ExtraHosts\\": null,\\n        \\"VolumesFrom\\": null,\\n        \\"Devices\\": [],\\n        \\"NetworkMode\\": \\"host\\",\\n        \\"IpcMode\\": \\"\\",\\n
+//\\"PidMode\\": \\"\\",\\n        \\"UTSMode\\": \\"\\",\\n        \\"CapAdd\\": null,\\n        \\"CapDrop\\": null,\\n        \\"GroupAdd\\": null,\\n        \\"RestartPolicy\\": {\\n            \\"Name\\": \\"no\\",\\n            \\"MaximumRetryCount\\": 0\\n        },\\n        \\"SecurityOpt\\": null,\\n        \\"ReadonlyRootfs\\": false,\\n
+//\\"Ulimits\\": null,\\n        \\"LogConfig\\": {\\n            \\"Type\\": \\"json-file\\",\\n            \\"Config\\": {}\\n        },\\n        \\"CgroupParent\\": \\"\\",\\n        \\"ConsoleSize\\": [\\n            0,\\n
+//   0\\n        ],\\n        \\"VolumeDriver\\": \\"\\"\\n    },\\n    \\"GraphDriver\\": {\\n        \\"Name\\": \\"aufs\\",\\n        \\"Data\\": null\\n    },\\n    \\"Mounts\\": [\\n        {\\n            \\"Source\\": \\"/fleetmake/data/consul/log\\",\\n            \\"Destination\\": \\"/var/consul/log\\",\\n            \\"Mode\\": \\"\\",\\n
+//    \\"RW\\": true\\n        },\\n        {\\n            \\"Source\\": \\"/fleetmake/data/consul/data\\",\\n
+//  \\"Destination\\": \\"/var/consul/data\\",\\n            \\"Mode\\": \\"\\",\\n            \\"RW\\": true\\n        },\\n        {\\n            \\"Source\\": \\"/fleetmake/data/consul/conf\\",\\n            \\"Destination\\": \\"/var/consul/config\\",\\n            \\"Mode\\": \\"\\",\\n            \\"RW\\": true\\n        }\\n    ],\\n    \\"Config\\": {\\n        \\"Hostname\\": \\"atomix\\",\\n        \\"Domainname\\": \\"\\",\\n        \\"User\\": \\"\\",\\n
+// \\"AttachStdin\\": false,\\n        \\"AttachStdout\\": false,\\n        \\"AttachStderr\\": false,\\n        \\"ExposedPorts\\": {\\n            \\"8300/tcp\\": {},\\n            \\"8301/tcp\\": {},\\n            \\"8301/udp\\": {},\\n
+//           \\"8302/tcp\\": {},\\n            \\"8302/udp\\": {},\\n            \\"8400/tcp\\": {},\\n            \\"8500/tcp\\": {},\\n            \\"8600/tcp\\": {},\\n            \\"8600/udp\\": {}\\n        },\\n        \\"Tty\\": false,\\n        \\"OpenStdin\\": false,\\n        \\"StdinOnce\\": false,\\n        \\"Env\\": [\\n            \\"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\\",\\n            \\"CONSUL_VERSION=0.5.2\\",\\n            \\"CONSUL_SHA256=171cf4074bfca3b1e46112105738985783f19c47f4408377241b868affa9d445\\"\\n        ],\\n        \\"Cmd\\": [\\n            \\"agent\\",\\n            \\"-config-file\\",\\n            \\"/var/consul/config/config.json\\",\\n
+//         \\"-bootstrap\\"\\n        ],\\n        \\"Image\\": \\"quobjectio/consul:0.5.2\\",\\n        \\"Volumes\\": {\\n            \\"/var/consul/config\\": {},\\n            \\"/var/consul/data\\": {},\\n            \\"/var/consul/log\\": {}\\n        },\\n        \\"WorkingDir\\": \\"\\",\\n        \\"Entrypoint\\": [\\n            \\"/run.sh\\"\\n
+//],\\n        \\"OnBuild\\": null,\\n        \\"Labels\\": {},\\n        \\"StopSignal\\": \\"SIGTERM\\"\\n    },\\n    \\"NetworkSettings\\": {\\n        \\"Bridge\\": \\"\\",\\n        \\"SandboxID\\": \\"bc04a89e70c29498c25a32472c62a01b8de7d12b31a856b539d66a344df079a2\\",\\n        \\"HairpinMode\\": false,\\n        \\"LinkLocalIPv6Address\\": \\"\\",\\n        \\"LinkLocalIPv6PrefixLen\\": 0,\\n        \\"Ports\\": {},\\n        \\"SandboxKey\\": \\"/var/run/docker/netns/default\\",\\n        \\"SecondaryIPAddresses\\": null,\\n        \\"SecondaryIPv6Addresses\\": null,\\n
+//\\"EndpointID\\": \\"\\",\\n        \\"Gateway\\": \\"\\",\\n        \\"GlobalIPv6Address\\": \\"\\",\\n        \\"GlobalIPv6PrefixLen\\": 0,\\n        \\"IPAddress\\": \\"\\",\\n        \\"IPPrefixLen\\": 0,\\n        \\"IPv6Gateway\\": \\"\\",\\n        \\"MacAddress\\": \\"\\",\\n        \\"Networks\\": {\\n            \\"host\\": {\\n
+//\\"EndpointID\\": \\"aeba20b34a47596646044493147fb1eafd5b4b76a3688f9b5c450b1dfe2bfdfb\\",\\n                \\"Gateway\\": \\"\\",\\n                \\"IPAddress\\": \\"\\",\\n                \\"IPPrefixLen\\": 0,\\n                \\"IPv6Gateway\\": \\"\\",\\n                \\"GlobalIPv6Address\\": \\"\\",\\n                \\"GlobalIPv6PrefixLen\\": 0,\\n                \\"MacAddress\\": \\"\\"\\n            }\\n        }\\n    }\\n}\\n]\\n",""]',
+//object:
+//[ { Id: '2e91854b5dd01a1bb9a8c67757264f32cd512385502f365321771bf669b0ff62',
+//  Created: '2016-01-14T01:53:08.855624531Z',
+//  Path: '/run.sh',
+//  Args:
+//   [ 'agent',
+//     '-config-file',
+//     '/var/consul/config/config.json',
+//     '-bootstrap' ],
+//  State:
+//   { Status: 'running',
+//     Running: true,
+//     Paused: false,
+//     Restarting: false,
+//     OOMKilled: false,
+//     Dead: false,
+//     Pid: 1913,
+//     ExitCode: 0,
+//     Error: '',
+//     StartedAt: '2016-01-14T01:53:08.999561111Z',
+//     FinishedAt: '0001-01-01T00:00:00Z' },
+//  Image: 'c2e8640282e5e8c0ed4efbffe661ebc9a3c6819fb3378f54eab6310a3754edc8',
+//  ResolvConfPath: '/var/lib/docker/containers/2e91854b5dd01a1bb9a8c67757264f32cd512385502f365321771bf669b0ff62/resolv.conf',
+//  HostnamePath: '/var/lib/docker/containers/2e91854b5dd01a1bb9a8c67757264f32cd512385502f365321771bf669b0ff62/hostname',
+//  HostsPath: '/var/lib/docker/containers/2e91854b5dd01a1bb9a8c67757264f32cd512385502f365321771bf669b0ff62/hosts',
+//  LogPath: '/var/lib/docker/containers/2e91854b5dd01a1bb9a8c67757264f32cd512385502f365321771bf669b0ff62/2e91854b5dd01a1bb9a8c67757264f32cd512385502f365321771bf669b0ff62-json.log',
+//  Name: '/consul',
+//  RestartCount: 0,
+//  Driver: 'aufs',
+//  ExecDriver: 'native-0.2',
+//  MountLabel: '',
+//  ProcessLabel: '',
+//  AppArmorProfile: '',
+//  ExecIDs: null,
+//  HostConfig:
+//   { Binds:
+//      [ '/fleetmake/data/consul/log:/var/consul/log',
+//        '/fleetmake/data/consul/data:/var/consul/data',
+//        '/fleetmake/data/consul/conf:/var/consul/config' ],
+//     ContainerIDFile: '',
+//     LxcConf: [],
+//     Memory: 0,
+//     MemoryReservation: 0,
+//     MemorySwap: 0,
+//     KernelMemory: 0,
+//     CpuShares: 0,
+//     CpuPeriod: 0,
+//     CpusetCpus: '',
+//     CpusetMems: '',
+//     CpuQuota: 0,
+//     BlkioWeight: 0,
+//     OomKillDisable: false,
+//     MemorySwappiness: -1,
+//     Privileged: false,
+//     PortBindings:
+//      { '8300/tcp': [ { HostIp: '', HostPort: '8300' } ],
+//        '8301/tcp': [ { HostIp: '', HostPort: '8301' } ],
+//        '8301/udp': [ { HostIp: '', HostPort: '8301' } ],
+//        '8302/tcp': [ { HostIp: '', HostPort: '8302' } ],
+//        '8302/udp': [ { HostIp: '', HostPort: '8302' } ],
+//        '8400/tcp': [ { HostIp: '', HostPort: '8400' } ],
+//        '8500/tcp': [ { HostIp: '', HostPort: '8500' } ],
+//        '8600/tcp': [ { HostIp: '', HostPort: '8600' } ],
+//        '8600/udp': [ { HostIp: '', HostPort: '8600' } ] },
+//     Links: null,
+//     PublishAllPorts: false,
+//     Dns: [],
+//     DnsOptions: [],
+//     DnsSearch: [],
+//     ExtraHosts: null,
+//     VolumesFrom: null,
+//     Devices: [],
+//     NetworkMode: 'host',
+//     IpcMode: '',
+//     PidMode: '',
+//     UTSMode: '',
+//     CapAdd: null,
+//     CapDrop: null,
+//     GroupAdd: null,
+//     RestartPolicy: { Name: 'no', MaximumRetryCount: 0 },
+//     SecurityOpt: null,
+//     ReadonlyRootfs: false,
+//     Ulimits: null,
+//     LogConfig: { Type: 'json-file', Config: {} },
+//     CgroupParent: '',
+//     ConsoleSize: [ 0, 0 ],
+//     VolumeDriver: '' },
+//  GraphDriver: { Name: 'aufs', Data: null },
+//  Mounts:
+//   [ { Source: '/fleetmake/data/consul/log',
+//     Destination: '/var/consul/log',
+//     Mode: '',
+//     RW: true },
+//     { Source: '/fleetmake/data/consul/data',
+//       Destination: '/var/consul/data',
+//       Mode: '',
+//       RW: true },
+//     { Source: '/fleetmake/data/consul/conf',
+//       Destination: '/var/consul/config',
+//       Mode: '',
+//       RW: true } ],
+//  Config:
+//   { Hostname: 'atomix',
+//     Domainname: '',
+//     User: '',
+//     AttachStdin: false,
+//     AttachStdout: false,
+//     AttachStderr: false,
+//     ExposedPorts:
+//      { '8300/tcp': {},
+//        '8301/tcp': {},
+//        '8301/udp': {},
+//        '8302/tcp': {},
+//        '8302/udp': {},
+//        '8400/tcp': {},
+//        '8500/tcp': {},
+//        '8600/tcp': {},
+//        '8600/udp': {} },
+//     Tty: false,
+//     OpenStdin: false,
+//     StdinOnce: false,
+//     Env:
+//      [ 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+//        'CONSUL_VERSION=0.5.2',
+//        'CONSUL_SHA256=171cf4074bfca3b1e46112105738985783f19c47f4408377241b868affa9d445' ],
+//     Cmd:
+//      [ 'agent',
+//        '-config-file',
+//        '/var/consul/config/config.json',
+//        '-bootstrap' ],
+//     Image: 'quobjectio/consul:0.5.2',
+//     Volumes:
+//      { '/var/consul/config': {},
+//        '/var/consul/data': {},
+//        '/var/consul/log': {} },
+//     WorkingDir: '',
+//     Entrypoint: [ '/run.sh' ],
+//     OnBuild: null,
+//     Labels: {},
+//     StopSignal: 'SIGTERM' },
+//  NetworkSettings:
+//   { Bridge: '',
+//     SandboxID: 'bc04a89e70c29498c25a32472c62a01b8de7d12b31a856b539d66a344df079a2',
+//     HairpinMode: false,
+//     LinkLocalIPv6Address: '',
+//     LinkLocalIPv6PrefixLen: 0,
+//     Ports: {},
+//     SandboxKey: '/var/run/docker/netns/default',
+//     SecondaryIPAddresses: null,
+//     SecondaryIPv6Addresses: null,
+//     EndpointID: '',
+//     Gateway: '',
+//     GlobalIPv6Address: '',
+//     GlobalIPv6PrefixLen: 0,
+//     IPAddress: '',
+//     IPPrefixLen: 0,
+//     IPv6Gateway: '',
+//     MacAddress: '',
+//     Networks:
+//      { host:
+//         { EndpointID: 'aeba20b34a47596646044493147fb1eafd5b4b76a3688f9b5c450b1dfe2bfdfb',
+//           Gateway: '',
+//           IPAddress: '',
+//           IPPrefixLen: 0,
+//           IPv6Gateway: '',
+//           GlobalIPv6Address: '',
+//           GlobalIPv6PrefixLen: 0,
+//           MacAddress: '' } } } } ] }
+```
