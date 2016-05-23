@@ -1,4 +1,4 @@
 {
-  "DockerMachineName": "enter value here"
- 
+  "accessKeyId": "keyid",
+  "secretAccessKey": "secret"
 }

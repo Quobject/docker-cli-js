@@ -1,39 +1,45 @@
 {
   "name": "docker-cli-js",
-  "version": "1.0.9",
-  "description": "A wrapper for the docker CLI",
-  "main": "lib/index.js",
+  "version": "2.0.0",
+  "description": "A node.js wrapper for the docker-machine CLI",
+  "main": "dist/index.js",
+  "typings": "dist/index",
+  "files": [
+    "dist/",
+    "typings.json"
+  ],
   "scripts": {
-    "test": "grunt"
+    "lint": "tslint src/**/*.ts",
+    "build": "rimraf dist/ && tsc",
+    "test-spec": "ts-node node_modules/blue-tape/bin/blue-tape.js \"src/**/*.spec.ts\" | tap-diff",
+    "test": "npm run lint && npm run build && npm run test-spec"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Quobject/docker-cli-js.git"
   },
   "keywords": [
-    "docker"
+    "table"
   ],
   "author": "Matthias Ludwig <mludwig@quobject.io>",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Quobject/docker-cli-js/issues"
   },
   "homepage": "https://github.com/Quobject/docker-cli-js",
   "devDependencies": {
-    "grunt-shell": "~1.1.2",
-    "grunt": "~0.4.5",
-    "grunt-contrib-jshint": "~0.11.3",
-    "mocha": "~2.3.3",
-    "grunt-mocha-test": "~0.12.7",
-    "should": "~7.1.0",
-    "chai": "~3.3.0",
-    "dockermachine": "0.0.5"
+    "blue-tape": "^0.2.0",
+    "bluebird": "^3.4.0",
+    "rimraf": "^2.5.2",
+    "tap-diff": "^0.1.1",
+    "ts-node": "^0.7.3",
+    "tslint": "^3.10.2",
+    "typescript": "^1.8.10"
   },
   "dependencies": {
-    "lodash": "~3.10.1",
-    "bluebird": "~2.10.1",
-    "debug": "~2.2.0",
-    "cli-table-2-json": "~1.0.0",
-    "dockermachine-cli-js": "~1.0.2"
+    "bluebird": "^3.4.0",
+    "cli-table-2-json": "^1.0.8",
+    "dockermachine-cli-js": "^2.0.4",
+    "lodash": "^4.12.0"
   }
 }

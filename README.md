@@ -17,7 +17,9 @@ The docker command line tool must be installed and accessible in the path
 Then:
 
 ```js
-var Docker = require('docker-cli-js');
+var dockerCLI = require('docker-cli-js');
+var DockerOptions = dockerCLI.Options;
+var Docker = dockerCLI.Docker;
 ```
 
 ## Usage
@@ -25,19 +27,21 @@ var Docker = require('docker-cli-js');
 With promise
 
 ```js
-   var docker = new Docker({
-     machinename: 'aws_machine01',
-     cwd: 'nginx'
-   });
+   var options = new DockerOptions(
+    /* machinename */ 'aws_machine01',
+    /* currentWorkingDirectory */ nginx
+   );    
 
-   docker.command('build -t nginximg1 .').then(function (data) {
+   var docker = new Docker(options);
+
+   docker.command('build -t nginximg .').then(function (data) {
     console.log('data = ', data);
    })
 
 
 //data = {
-//  command: 'docker --tlsverify --tlscacert="/home/ubuntu/.docker/machine/machines/aws_machine01/ca.pem" --tlscert="/home/ubuntu/.docker/machine/machines/aws_machine01/cert.pem" --tlskey="/home/ubuntu/.docker/machine/machines/aws_machine01/key.pem" -H=tcp://52.64.142.194:2376 build -t nginximg1 . ',
-//  raw: '["Sending build context to Docker daemon 3.584 kB\\rSending build context to Docker daemon 3.584 kB\\r\\r\\nStep 0 : FROM nginx\\nlatest: Pulling from library/nginx\\n843e2bded498: Pulling fs layer\\n8c00acfb0175: Pulling fs layer\\n426ac73b867e: Pulling fs layer\\nd6c6bbd63f57: Pulling fs layer\\n4ac684e3f295: Pulling fs layer\\n91391bd3c4d3: Pulling fs layer\\nb4587525ed53: Pulling fs layer\\n0240288f5187: Pulling fs layer\\n28c109ec1572: Pulling fs layer\\n063d51552dac: Pulling fs layer\\nd8a70839d961: Pulling fs layer\\nceab60537ad2: Pulling fs layer\\nd8a70839d961: Verifying Checksum\\nd8a70839d961: Download complete\\n4ac684e3f295: Verifying Checksum\\n4ac684e3f295: Download complete\\n0240288f5187: Verifying Checksum\\n0240288f5187: Download complete\\nd6c6bbd63f57: Verifying Checksum\\nd6c6bbd63f57: Download complete\\n8c00acfb0175: Verifying Checksum\\n8c00acfb0175: Download complete\\nceab60537ad2: Verifying Checksum\\nceab60537ad2: Download complete\\n28c109ec1572: Verifying Checksum\\n28c109ec1572: Download complete\\n426ac73b867e: Verifying Checksum\\n426ac73b867e: Download complete\\n063d51552dac: Verifying Checksum\\n063d51552dac: Download complete\\n91391bd3c4d3: Verifying Checksum\\n91391bd3c4d3: Download complete\\nb4587525ed53: Verifying Checksum\\nb4587525ed53: Download complete\\n843e2bded498: Verifying Checksum\\n843e2bded498: Download complete\\n843e2bded498: Pull complete\\n8c00acfb0175: Pull complete\\n426ac73b867e: Pull complete\\nd6c6bbd63f57: Pull complete\\n4ac684e3f295: Pull complete\\n91391bd3c4d3: Pull complete\\nb4587525ed53: Pull complete\\n0240288f5187: Pull complete\\n28c109ec1572: Pull complete\\n063d51552dac: Pull complete\\nd8a70839d961: Pull complete\\nceab60537ad2: Pull complete\\nlibrary/nginx:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.\\nDigest: sha256:302e0a331371acb77e434075d111ebe485a7f3605fdcf184185fcca73d65ac8b\\nStatus: Downloaded newer image for nginx:latest\\n ---> ceab60537ad2\\nStep 1 : COPY content /usr/share/nginx/html\\n ---> d57e3a01e674\\nRemoving intermediate container 84b42b1010a6\\nSuccessfully built d57e3a01e674\\n",""]',
+//  command: 'docker --tlsverify --tlscacert="/home/ubuntu/.docker/machine/machines/aws_machine01/ca.pem" --tlscert="/home/ubuntu/.docker/machine/machines/aws_machine01/cert.pem" --tlskey="/home/ubuntu/.docker/machine/machines/aws_machine01/key.pem" -H=tcp://52.64.142.194:2376 build -t nginximg . ',
+//  raw: 'Sending build context to Docker daemon 3.584 kB\\rSending build context to Docker daemon 3.584 kB\\r\\r\\nStep 0 : FROM nginx\\nlatest: Pulling from library/nginx\\n843e2bded498: Pulling fs layer\\n8c00acfb0175: Pulling fs layer\\n426ac73b867e: Pulling fs layer\\nd6c6bbd63f57: Pulling fs layer\\n4ac684e3f295: Pulling fs layer\\n91391bd3c4d3: Pulling fs layer\\nb4587525ed53: Pulling fs layer\\n0240288f5187: Pulling fs layer\\n28c109ec1572: Pulling fs layer\\n063d51552dac: Pulling fs layer\\nd8a70839d961: Pulling fs layer\\nceab60537ad2: Pulling fs layer\\nd8a70839d961: Verifying Checksum\\nd8a70839d961: Download complete\\n4ac684e3f295: Verifying Checksum\\n4ac684e3f295: Download complete\\n0240288f5187: Verifying Checksum\\n0240288f5187: Download complete\\nd6c6bbd63f57: Verifying Checksum\\nd6c6bbd63f57: Download complete\\n8c00acfb0175: Verifying Checksum\\n8c00acfb0175: Download complete\\nceab60537ad2: Verifying Checksum\\nceab60537ad2: Download complete\\n28c109ec1572: Verifying Checksum\\n28c109ec1572: Download complete\\n426ac73b867e: Verifying Checksum\\n426ac73b867e: Download complete\\n063d51552dac: Verifying Checksum\\n063d51552dac: Download complete\\n91391bd3c4d3: Verifying Checksum\\n91391bd3c4d3: Download complete\\nb4587525ed53: Verifying Checksum\\nb4587525ed53: Download complete\\n843e2bded498: Verifying Checksum\\n843e2bded498: Download complete\\n843e2bded498: Pull complete\\n8c00acfb0175: Pull complete\\n426ac73b867e: Pull complete\\nd6c6bbd63f57: Pull complete\\n4ac684e3f295: Pull complete\\n91391bd3c4d3: Pull complete\\nb4587525ed53: Pull complete\\n0240288f5187: Pull complete\\n28c109ec1572: Pull complete\\n063d51552dac: Pull complete\\nd8a70839d961: Pull complete\\nceab60537ad2: Pull complete\\nlibrary/nginx:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.\\nDigest: sha256:302e0a331371acb77e434075d111ebe485a7f3605fdcf184185fcca73d65ac8b\\nStatus: Downloaded newer image for nginx:latest\\n ---> ceab60537ad2\\nStep 1 : COPY content /usr/share/nginx/html\\n ---> d57e3a01e674\\nRemoving intermediate container 84b42b1010a6\\nSuccessfully built d57e3a01e674\\n',
 //  success: true,
 //  imageId: 'd57e3a01e674',
 //  response:
@@ -107,43 +111,44 @@ With promise
 With callback:
 
 ```js
-   var docker = new Docker({
-     cwd: 'nginx'
-   });
+   var docker = new Docker();
 
-  docker.command('build -t nginximg1 .', function (err, data) {
+  docker.command('info', function (err, data) {
     console.log('data = ', data);
   });
 
-//data = {
-//  command: 'docker build -t nginximg1 . ',
-//  raw: '["Sending build context to Docker daemon 3.584 kB\\rSending build context to Docker daemon 3.584 kB\\r\\r\\nStep 0 : FROM nginx\\n ---> 6886fb5a9b8d\\nStep 1 : COPY content /usr/share/nginx/html\\n ---> Using cache\\n ---> abdf8a18f0a1\\nSuccessfully built abdf8a18f0a1\\n",""]',
-//  success: true,
-//  imageId: 'abdf8a18f0a1',
-//  response:
-//   ['Sending build context to Docker daemon 3.584 kB\rSending build context to Docker daemon 3.584 kB\r\r',
-//     'Step 0 : FROM nginx',
-//     ' ---> 6886fb5a9b8d',
-//     'Step 1 : COPY content /usr/share/nginx/html',
-//     ' ---> Using cache',
-//     ' ---> abdf8a18f0a1',
-//     'Successfully built abdf8a18f0a1',
-//     '']
-//}
 
 ```
+
+Typescript
+
+```ts
+import { Docker, Options } from 'docker-cli-js';
+
+const options = new Options(
+  /* machineName */ null,
+  /* currentWorkingDirectory */ path.join(__dirname, '..', 'test', 'nginx')
+);
+
+let docker = new Docker(options);
+
+docker.command('build -t nginximg .').then(function (data) {
+  console.log('data = ', data);
+});
+```
+
 
 * docker run
 
 ```js
 
-docker.command('run --name nginxcont -d -p 80:80 nginximg1').then(function (data) {
+docker.command('run --name nginxcont -d -p 80:80 nginximg').then(function (data) {
   console.log('data = ', data);
 });
 
 //data = {
-//  command: 'docker run --name nginxcont -d -p 80:80 nginximg1 ',
-//  raw: '["c0df7ad377630bd3bd05fba217e295434fa2d5da03c5216e531a9421530360dc\\n",""]',
+//  command: 'docker run --name nginxcont -d -p 80:80 nginximg ',
+//  raw: 'c0df7ad377630bd3bd05fba217e295434fa2d5da03c5216e531a9421530360dc\\n',
 //  containerId: 'c0df7ad377630bd3bd05fba217e295434fa2d5da03c5216e531a9421530360dc'
 //}
 ```
@@ -158,11 +163,11 @@ docker.command('ps').then(function (data) {
 
 
 //data =  { command: 'docker ps ',
-//  raw: '["CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS
-//                  NAMES\\nc0df7ad37763        nginximg1           \\"nginx -g \'daemon off\\"   33 minutes ago      Up 33 minutes       0.0.0.0:80->80/tcp, 443/tcp   nginxcont\\n",""]',
+//  raw: 'CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS
+//                  NAMES\\nc0df7ad37763        nginximg           \\"nginx -g \'daemon off\\"   33 minutes ago      Up 33 minutes       0.0.0.0:80->80/tcp, 443/tcp   nginxcont\\n',
 //containerList:
 //[ { containerId: 'c0df7ad37763',
-//  image: 'nginximg1',
+//  image: 'nginximg',
 //  command: '"nginx -g \'daemon off"',
 //  created: '33 minutes ago',
 //  status: 'Up 33 minutes',
@@ -180,11 +185,11 @@ docker.command('images').then(function (data) {
 
 
 //data =  { command: 'docker images ',
-//  raw: '["REPOSITORY             TAG                  IMAGE ID            CREATED             VIRTUAL SIZE\\nquobjectio/consul
+//  raw: 'REPOSITORY             TAG                  IMAGE ID            CREATED             VIRTUAL SIZE\\nquobjectio/consul
 //     0.5.2                c2e8640282e5        5 days ago          37.17 MB\\nquobjectio/consul      0.5.2c               74ae12b3b517        5 days ago          35.92 MB\\n<none>                 <none>               35682216ba6f        6 days ago
 //35.92 MB\\nquobjectio/mongodb     3.0.7                5ca1d18839fb        10 days ago         347 MB\\nquobjectio/mongodb
 //3.0.7d               5ca1d18839fb        10 days ago         347 MB\\nquobjectio/zookeeper   3.4.6-ubuntu-14.04   92eedb07b809        2 weeks ago         369.9 MB\\nswarm                  latest               6b40fe7724bd        2 weeks ago         15.6 MB\\nalpine                 3.2                  8a648f689ddb        9 weeks ago         5.249 MB\\nalpine                 latest               8a648f689ddb        9 weeks ago         5.249 MB\\nubuntu                 latest               91e54dfb1179
-//3 months ago        188.4 MB\\nubuntu                 14.04                8251da35e7a7        3 months ago        188.4 MB\\nubuntu                 15.04                23635bbeb7c5        3 months ago        131.3 MB\\ntutum/mongodb          latest               e27c5e60a8f1        5 months ago        502.6 MB\\n",""]',
+//3 months ago        188.4 MB\\nubuntu                 14.04                8251da35e7a7        3 months ago        188.4 MB\\nubuntu                 15.04                23635bbeb7c5        3 months ago        131.3 MB\\ntutum/mongodb          latest               e27c5e60a8f1        5 months ago        502.6 MB\\n',
 //images:
 //[ { repository: 'quobjectio/consul',
 //  tag: '0.5.2',
@@ -264,7 +269,7 @@ docker.command('network ls').then(function (data) {
 
 //data = {
 //  command: 'docker network ls ',
-//  raw: '["NETWORK ID          NAME                                      DRIVER\\n4d6a0a35e87f        machine.1.ap-southeast-2.1.0.0.5/none     null                \\n042642d752f4        machine.1.ap-southeast-2.1.0.0.5/host     host                \\n6cc7e229d7c3        machine.1.ap-southeast-2.2.0.0.5/none     null                \\n4a6e627fc1dc        machine.1.ap-southeast-2.2.0.0.5/host     host                \\ne1b70f5af1c8        machine.1.ap-southeast-2.2.0.0.5/bridge   bridge              \\n1f5d449aca44        machine.1.ap-southeast-2.1.0.0.5/bridge   bridge              \\n",""]',
+//  raw: 'NETWORK ID          NAME                                      DRIVER\\n4d6a0a35e87f        machine.1.ap-southeast-2.1.0.0.5/none     null                \\n042642d752f4        machine.1.ap-southeast-2.1.0.0.5/host     host                \\n6cc7e229d7c3        machine.1.ap-southeast-2.2.0.0.5/none     null                \\n4a6e627fc1dc        machine.1.ap-southeast-2.2.0.0.5/host     host                \\ne1b70f5af1c8        machine.1.ap-southeast-2.2.0.0.5/bridge   bridge              \\n1f5d449aca44        machine.1.ap-southeast-2.1.0.0.5/bridge   bridge              \\n',
 //  network:
 //   [{
 //     'network id': '4d6a0a35e87f',
@@ -308,7 +313,7 @@ docker.command('inspect consul').then(function (data) {
 
 
 //data =  { command: 'docker inspect consul ',
-//  raw: '["[\\n{\\n    \\"Id\\": \\"2e91854b5dd01a1bb9a8c67757264f32cd512385502f365321771bf669b0ff62\\",\\n    \\"Created\\": \\"2016-01-14T01:53:08.855624531Z\\",\\n    \\"Path\\": \\"/run.sh\\",\\n    \\"Args\\": [\\n        \\"agent\\",\\n        \\"-config-file\\",\\n        \\"/var/consul/config/config.json\\",\\n        \\"-bootstrap\\"\\n    ],\\n
+//  raw: '[\\n{\\n    \\"Id\\": \\"2e91854b5dd01a1bb9a8c67757264f32cd512385502f365321771bf669b0ff62\\",\\n    \\"Created\\": \\"2016-01-14T01:53:08.855624531Z\\",\\n    \\"Path\\": \\"/run.sh\\",\\n    \\"Args\\": [\\n        \\"agent\\",\\n        \\"-config-file\\",\\n        \\"/var/consul/config/config.json\\",\\n        \\"-bootstrap\\"\\n    ],\\n
 //  \\"State\\": {\\n        \\"Status\\": \\"running\\",\\n        \\"Running\\": true,\\n        \\"Paused\\": false,\\n        \\"Restarting\\": false,\\n        \\"OOMKilled\\": false,\\n        \\"Dead\\": false,\\n        \\"Pid\\": 1913,\\n        \\"ExitCode\\": 0,\\n        \\"Error\\": \\"\\",\\n        \\"StartedAt\\": \\"2016-01-14T01:53:08.999561111Z\\",\\n        \\"FinishedAt\\": \\"0001-01-01T00:00:00Z\\"\\n    },\\n    \\"Image\\": \\"c2e8640282e5e8c0ed4efbffe661ebc9a3c6819fb3378f54eab6310a3754edc8\\",\\n    \\"ResolvConfPath\\": \\"/var/lib/docker/containers/2e91854b5dd01a1bb9a8c67757264f32cd512385502f365321771bf669b0ff62/resolv.conf\\",\\n    \\"HostnamePath\\": \\"/var/lib/docker/containers/2e91854b5dd01a1bb9a8c67757264f32cd512385502f365321771bf669b0ff62/hostname\\",\\n    \\"HostsPath\\": \\"/var/lib/docker/containers/2e91854b5dd01a1bb9a8c67757264f32cd512385502f365321771bf669b0ff62/hosts\\",\\n    \\"LogPath\\": \\"/var/lib/docker/containers/2e91854b5dd01a1bb9a8c67757264f32cd512385502f365321771bf669b0ff62/2e91854b5dd01a1bb9a8c67757264f32cd512385502f365321771bf669b0ff62-json.log\\",\\n    \\"Name\\": \\"/consul\\",\\n    \\"RestartCount\\": 0,\\n    \\"Driver\\": \\"aufs\\",\\n    \\"ExecDriver\\": \\"native-0.2\\",\\n    \\"MountLabel\\": \\"\\",\\n    \\"ProcessLabel\\": \\"\\",\\n    \\"AppArmorProfile\\": \\"\\",\\n    \\"ExecIDs\\": null,\\n    \\"HostConfig\\": {\\n        \\"Binds\\": [\\n            \\"/fleetmake/data/consul/log:/var/consul/log\\",\\n            \\"/fleetmake/data/consul/data:/var/consul/data\\",\\n            \\"/fleetmake/data/consul/conf:/var/consul/config\\"\\n        ],\\n        \\"ContainerIDFile\\": \\"\\",\\n        \\"LxcConf\\": [],\\n        \\"Memory\\": 0,\\n        \\"MemoryReservation\\": 0,\\n
 //     \\"MemorySwap\\": 0,\\n        \\"KernelMemory\\": 0,\\n        \\"CpuShares\\": 0,\\n        \\"CpuPeriod\\": 0,\\n        \\"CpusetCpus\\": \\"\\",\\n        \\"CpusetMems\\": \\"\\",\\n        \\"CpuQuota\\": 0,\\n        \\"BlkioWeight\\": 0,\\n        \\"OomKillDisable\\": false,\\n        \\"MemorySwappiness\\": -1,\\n        \\"Privileged\\": false,\\n        \\"PortBindings\\": {\\n            \\"8300/tcp\\": [\\n                {\\n                    \\"HostIp\\": \\"\\",\\n                    \\"HostPort\\": \\"8300\\"\\n                }\\n            ],\\n            \\"8301/tcp\\": [\\n                {\\n                    \\"HostIp\\": \\"\\",\\n                    \\"HostPort\\": \\"8301\\"\\n                }\\n            ],\\n            \\"8301/udp\\": [\\n                {\\n
 // \\"HostIp\\": \\"\\",\\n                    \\"HostPort\\": \\"8301\\"\\n                }\\n            ],\\n
@@ -330,7 +335,7 @@ docker.command('inspect consul').then(function (data) {
 //         \\"-bootstrap\\"\\n        ],\\n        \\"Image\\": \\"quobjectio/consul:0.5.2\\",\\n        \\"Volumes\\": {\\n            \\"/var/consul/config\\": {},\\n            \\"/var/consul/data\\": {},\\n            \\"/var/consul/log\\": {}\\n        },\\n        \\"WorkingDir\\": \\"\\",\\n        \\"Entrypoint\\": [\\n            \\"/run.sh\\"\\n
 //],\\n        \\"OnBuild\\": null,\\n        \\"Labels\\": {},\\n        \\"StopSignal\\": \\"SIGTERM\\"\\n    },\\n    \\"NetworkSettings\\": {\\n        \\"Bridge\\": \\"\\",\\n        \\"SandboxID\\": \\"bc04a89e70c29498c25a32472c62a01b8de7d12b31a856b539d66a344df079a2\\",\\n        \\"HairpinMode\\": false,\\n        \\"LinkLocalIPv6Address\\": \\"\\",\\n        \\"LinkLocalIPv6PrefixLen\\": 0,\\n        \\"Ports\\": {},\\n        \\"SandboxKey\\": \\"/var/run/docker/netns/default\\",\\n        \\"SecondaryIPAddresses\\": null,\\n        \\"SecondaryIPv6Addresses\\": null,\\n
 //\\"EndpointID\\": \\"\\",\\n        \\"Gateway\\": \\"\\",\\n        \\"GlobalIPv6Address\\": \\"\\",\\n        \\"GlobalIPv6PrefixLen\\": 0,\\n        \\"IPAddress\\": \\"\\",\\n        \\"IPPrefixLen\\": 0,\\n        \\"IPv6Gateway\\": \\"\\",\\n        \\"MacAddress\\": \\"\\",\\n        \\"Networks\\": {\\n            \\"host\\": {\\n
-//\\"EndpointID\\": \\"aeba20b34a47596646044493147fb1eafd5b4b76a3688f9b5c450b1dfe2bfdfb\\",\\n                \\"Gateway\\": \\"\\",\\n                \\"IPAddress\\": \\"\\",\\n                \\"IPPrefixLen\\": 0,\\n                \\"IPv6Gateway\\": \\"\\",\\n                \\"GlobalIPv6Address\\": \\"\\",\\n                \\"GlobalIPv6PrefixLen\\": 0,\\n                \\"MacAddress\\": \\"\\"\\n            }\\n        }\\n    }\\n}\\n]\\n",""]',
+//\\"EndpointID\\": \\"aeba20b34a47596646044493147fb1eafd5b4b76a3688f9b5c450b1dfe2bfdfb\\",\\n                \\"Gateway\\": \\"\\",\\n                \\"IPAddress\\": \\"\\",\\n                \\"IPPrefixLen\\": 0,\\n                \\"IPv6Gateway\\": \\"\\",\\n                \\"GlobalIPv6Address\\": \\"\\",\\n                \\"GlobalIPv6PrefixLen\\": 0,\\n                \\"MacAddress\\": \\"\\"\\n            }\\n        }\\n    }\\n}\\n]\\n',
 //object:
 //[ { Id: '2e91854b5dd01a1bb9a8c67757264f32cd512385502f365321771bf669b0ff62',
 //  Created: '2016-01-14T01:53:08.855624531Z',
@@ -500,3 +505,42 @@ docker.command('inspect consul').then(function (data) {
 //           GlobalIPv6PrefixLen: 0,
 //           MacAddress: '' } } } } ] }
 ```
+
+
+* docker info
+
+```js
+
+docker.command('info').then(function (data) {
+  console.log('data = ', data);
+});
+
+//{ command: 'docker info  ',
+//  raw: '"Containers: 1\\n Running: 0\\n Paused: 0\\n Stopped: 1\\nImages: 835\\nServer Version: 1.10.3\\nStorage Driver: aufs\\n Root Dir: /var/lib/docker/aufs\\n Backing Filesystem: extfs\\n Dirs: 836\\n Dirperm1 Supported: true\\nExecution Driver: native-0.2\\nLogging Driver: json-file\\nPlugins: \\n Volume: local\\n Network: bridge null host\\nKernel Version: 3.19.0-39-generic\\nOperating System: Ubuntu 14.04.3 LTS\\nOSType: linux\\nArchitecture: x86_64\\nCPUs: 8\\nTotal Memory: 31.31 GiB\\nName: atomix\\nID: 3KBH:CSNL:ZFBD:7HG4:QHTG:LXN5:37YQ:TUXL:KJGP:JFL7:JLVU:77PL\\nUsername: quobject\\nRegistry: https://index.docker.io/v1/\\n"',
+//  object:
+//  { containers: '1',
+//    running: '0',
+//    paused: '0',
+//    stopped: '1',
+//    images: '835',
+//    server_version: '1.10.3',
+//    storage_driver: 'aufs',
+//    root_dir: '/var/lib/docker/aufs',
+//    backing_filesystem: 'extfs',
+//    dirs: '836',
+//    dirperm_1_supported: 'true',
+//    execution_driver: 'native-0.2',
+//    logging_driver: 'json-file',
+//    plugins: '',
+//    volume: 'local',
+//    network: 'bridge null host',
+//    kernel_version: '3.19.0-39-generic',
+//    operating_system: 'Ubuntu 14.04.3 LTS',
+//    os_type: 'linux',
+//    architecture: 'x86_64',
+//    cp_us: '8',
+//    total_memory: '31.31 GiB',
+//    name: 'atomix',
+//    id: '3KBH:CSNL:ZFBD:7HG4:QHTG:LXN5:37YQ:TUXL:KJGP:JFL7:JLVU:77PL',
+//    username: 'quobject',
+//    registry: 'https://index.docker.io/v1/' } }
