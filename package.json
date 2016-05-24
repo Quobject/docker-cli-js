@@ -1,6 +1,6 @@
 {
   "name": "docker-cli-js",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "A node.js wrapper for the docker-machine CLI",
   "main": "dist/index.js",
   "typings": "dist/index",
@@ -19,7 +19,7 @@
     "url": "git+https://github.com/Quobject/docker-cli-js.git"
   },
   "keywords": [
-    "table"
+    "docker"
   ],
   "author": "Matthias Ludwig <mludwig@quobject.io>",
   "license": "MIT",
