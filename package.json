@@ -1,18 +1,18 @@
 {
   "name": "docker-cli-js",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A node.js wrapper for the docker-machine CLI",
   "main": "dist/index.js",
   "typings": "dist/index",
   "files": [
-    "dist/",
-    "typings.json"
+    "dist/"
   ],
   "scripts": {
     "lint": "tslint src/**/*.ts",
     "build": "rimraf dist/ && tsc",
     "test-spec": "ts-node node_modules/blue-tape/bin/blue-tape.js \"src/**/*.spec.ts\" | tap-diff",
-    "test": "npm run lint && npm run build && npm run test-spec"
+    "test": "npm run lint && npm run build && npm run test-spec",
+    "prepublish": "npm run lint && npm run build && rimraf dist/**/*.spec.* "
   },
   "repository": {
     "type": "git",

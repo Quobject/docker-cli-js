@@ -22,17 +22,6 @@ test('docker-cli-js', t => {
 
   });
 
-  //t.test('info callback', t => {
-  //  let docker = new Docker();
-
-  //  return docker.command('info', function (err, data) {
-  //    console.log(data);
-  //    t.ok(data);
-  //    t.ok(data.object.server_version);
-  //  });
-
-  //});
-
   //t.test('info', t => {
   //  const options = new Options(
   //    /* machineName */ 'machinename',
@@ -49,7 +38,7 @@ test('docker-cli-js', t => {
 
   //});
 
-  //t.test('build', t => {
+  t.test('build', t => {
 
     const options = new Options(
       /* machineName */ null,
@@ -60,58 +49,60 @@ test('docker-cli-js', t => {
 
     return docker.command('build -t nginximg .').then(function (data) {
       console.log('data = ', data);
+      t.ok(data);
+      t.ok(data.success);
     });
-  //});
+  });
 
 
-  //t.test('run', t => {
+  t.test('run', t => {
 
-  //  let docker = new Docker();
+    let docker = new Docker();
 
-  //  return docker.command('run --name nginxcont -d -p 80:80 nginximg').then(function (data) {
-  //    console.log('data = ', data);
-  //    t.ok(data.containerId);
-  //  });
-  //});
+    return docker.command('run --name nginxcont -d -p 80:80 nginximg').then(function (data) {
+      console.log('data = ', data);
+      t.ok(data.containerId);
+    });
+  });
 
-  //t.test('ps', t => {
+  t.test('ps', t => {
 
-  //  let docker = new Docker();
+    let docker = new Docker();
 
-  //  return docker.command('ps').then(function (data) {
-  //    console.log('data = ', data);
-  //    t.ok(data.containerList);
-  //  });
-  //});
+    return docker.command('ps').then(function (data) {
+      console.log('data = ', data);
+      t.ok(data.containerList);
+    });
+  });
 
-  //t.test('images', t => {
+  t.test('images', t => {
 
-  //  let docker = new Docker();
+    let docker = new Docker();
 
-  //  return docker.command('images').then(function (data) {
-  //    console.log('data = ', data);
-  //    t.ok(data.images);
-  //  });
-  //});
+    return docker.command('images').then(function (data) {
+      console.log('data = ', data);
+      t.ok(data.images);
+    });
+  });
 
-  //t.test('network ls', t => {
+  t.test('network ls', t => {
 
-  //  let docker = new Docker();
+    let docker = new Docker();
 
-  //  return docker.command('network ls').then(function (data) {
-  //    console.log('data = ', data);
-  //    t.ok(data.network);
-  //  });
-  //});
+    return docker.command('network ls').then(function (data) {
+      console.log('data = ', data);
+      t.ok(data.network);
+    });
+  });
 
-  //t.test('inspect', t => {
+  t.test('inspect', t => {
 
-  //  let docker = new Docker();
+    let docker = new Docker();
 
-  //  return docker.command('inspect nginxcont').then(function (data) {
-  //    console.log('data = ', data);
-  //    t.ok(data.object);
-  //  });
-  //});
+    return docker.command('inspect nginxcont').then(function (data) {
+      console.log('data = ', data);
+      t.ok(data.object);
+    });
+  });
 
 });

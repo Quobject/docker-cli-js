@@ -27,7 +27,7 @@ const extractResult = function (result) {
 
   const extracterArray = [
     {
-      re: /build/,
+      re: / build /,
       run: function (resultp) {
         const lines = resultp.raw.split(os.EOL);
 
@@ -53,7 +53,7 @@ const extractResult = function (result) {
       },
     },
     {
-      re: /run/,
+      re: / run /,
       run: function (resultp) {
         resultp.containerId = resultp.raw.trim();
 
@@ -62,7 +62,7 @@ const extractResult = function (result) {
       },
     },
     {
-      re: /ps/,
+      re: / ps /,
       run: function (resultp) {
         const lines = resultp.raw.split(os.EOL);
 
@@ -72,7 +72,7 @@ const extractResult = function (result) {
       },
     },
     {
-      re: /images/,
+      re: / images /,
       run: function (resultp) {
         const lines = resultp.raw.split(os.EOL);
 
@@ -84,7 +84,7 @@ const extractResult = function (result) {
       },
     },
     {
-      re: /network ls/,
+      re: / network ls /,
       run: function (resultp) {
         const lines = resultp.raw.split(os.EOL);
 
@@ -96,7 +96,7 @@ const extractResult = function (result) {
       },
     },
     {
-      re: /inspect/,
+      re: / inspect /,
       run: function (resultp) {
         const object = JSON.parse(resultp.raw);
 
@@ -106,7 +106,7 @@ const extractResult = function (result) {
       },
     },
     {
-      re: /info/,
+      re: / info /,
       run: function (resultp) {
         const lines = resultp.raw.split(os.EOL);
         resultp.object = array2Oject(lines);
@@ -160,10 +160,7 @@ export class Docker {
         });
       }
     }).then(function () {
-      return Promise.delay(2000);
-    }).then(function () {
-      execCommand += ' ' + machineconfig + ' ' + command;
-
+      execCommand += ' ' + machineconfig + ' ' + command + ' ';
 
       let execOptions = {
         cwd: docker.options.currentWorkingDirectory,
@@ -175,16 +172,11 @@ export class Docker {
         maxBuffer: 200 * 1024 * 1024,
       };
 
-
       return new Promise(function (resolve, reject) {
         //console.log('execCommand =', execCommand);
         //console.log('exec options =', execOptions);
 
-        //setTimeout(function () {
-        //  resolve('test');
-        //}, 3000);
-
-        return exec(execCommand, execOptions, function(error, stdout, stderr) {
+        exec(execCommand, execOptions, function(error, stdout, stderr) {
           if (error) {
             //console.error(`exec error: ${error}`);
             return reject(stderr);
@@ -194,7 +186,7 @@ export class Docker {
           resolve({ result: stdout});
         });
       });
-      }).then(function (data: { result: string }) {
+    }).then(function (data: { result: string }) {
       //console.log('data:', data);
       let result = {
         command: execCommand,
