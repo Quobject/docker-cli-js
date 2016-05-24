@@ -29,7 +29,7 @@ With promise
 ```js
    var options = new DockerOptions(
     /* machinename */ 'aws_machine01',
-    /* currentWorkingDirectory */ nginx
+    /* currentWorkingDirectory */ 'nginx''
    );    
 
    var docker = new Docker(options);
