@@ -178,8 +178,9 @@ export class Docker {
 
         exec(execCommand, execOptions, function(error, stdout, stderr) {
           if (error) {
-            //console.error(`exec error: ${error}`);
-            return reject(stderr);
+            const message = `error: '${error}' stdout = '${stdout}' stderr = '${stderr}'`;
+            console.error(message);
+            reject(message);
           }
           //need to wrap stdout in object
           //doesn't work otherwise for 'build - t nginximg1 .'
