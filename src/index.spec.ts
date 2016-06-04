@@ -1,7 +1,6 @@
 /* tslint:disable:no-shadowed-variable */
 /* tslint:disable:no-unused-variable */
 import test = require('blue-tape');
-import * as Promise from 'bluebird';
 import * as path from 'path';
 import { Docker, Options } from './index';
 const config = require('../my_config.json');

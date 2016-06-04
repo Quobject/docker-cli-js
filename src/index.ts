@@ -1,7 +1,7 @@
 ﻿import * as _ from 'lodash';
-import * as Promise from 'bluebird';
 import * as child_process from 'child_process';
 import * as os from 'os';
+import nodeify from 'nodeify-ts';
 import { cliTable2Json } from 'cli-table-2-json';
 import { DockerMachine } from 'dockermachine-cli-js';
 const exec = child_process.exec;
@@ -149,7 +149,7 @@ export class Docker {
     let execCommand = 'docker ';
     let machineconfig = '';
 
-    return Promise.resolve().then(function () {
+    const promise = Promise.resolve().then(function () {
       if (docker.options.machineName) {
 
         const dockerMachine = new DockerMachine();
@@ -195,7 +195,9 @@ export class Docker {
       };
       return extractResult(result);
 
-    }).nodeify(callback);
+      });
+
+      return nodeify(promise, callback);
   }
 }
 

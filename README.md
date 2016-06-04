@@ -4,6 +4,9 @@ A node.js wrapper for the docker command line tool
 [![NPM](https://nodei.co/npm/docker-cli-js.png?downloads=true&downloadRank=true)](https://nodei.co/npm/docker-cli-js/)
 [![NPM](https://nodei.co/npm-dl/docker-cli-js.png?months=6&height=3)](https://nodei.co/npm/docker-cli-js/)
 
+[![NPM version][npm-image]][npm-url]
+[![NPM downloads][downloads-image]][downloads-url]
+
 ## Installation
 
 ### Step 1: Prerequisites
@@ -24,7 +27,7 @@ var Docker = dockerCLI.Docker;
 
 ## Usage
 
-With promise
+### With promise
 
 ```js
    var options = new DockerOptions(
@@ -108,7 +111,7 @@ With promise
 //}
 ```
 
-With callback:
+### With callback:
 
 ```js
    var docker = new Docker();
@@ -120,7 +123,7 @@ With callback:
 
 ```
 
-Typescript
+### Typescript
 
 ```ts
 import { Docker, Options } from 'docker-cli-js';
@@ -544,3 +547,13 @@ docker.command('info').then(function (data) {
 //    id: '3KBH:CSNL:ZFBD:7HG4:QHTG:LXN5:37YQ:TUXL:KJGP:JFL7:JLVU:77PL',
 //    username: 'quobject',
 //    registry: 'https://index.docker.io/v1/' } }
+
+
+## License
+
+MIT
+
+[npm-image]: https://img.shields.io/npm/v/docker-cli-js.svg?style=flat
+[npm-url]: https://npmjs.org/package/docker-cli-js
+[downloads-image]: https://img.shields.io/npm/dm/docker-cli-js.svg?style=flat
+[downloads-url]: https://npmjs.org/package/docker-cli-js
