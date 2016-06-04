@@ -547,7 +547,7 @@ docker.command('info').then(function (data) {
 //    id: '3KBH:CSNL:ZFBD:7HG4:QHTG:LXN5:37YQ:TUXL:KJGP:JFL7:JLVU:77PL',
 //    username: 'quobject',
 //    registry: 'https://index.docker.io/v1/' } }
-
+```
 
 ## License
 
