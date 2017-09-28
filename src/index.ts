@@ -7,7 +7,7 @@ import { DockerMachine } from 'dockermachine-cli-js';
 const exec = child_process.exec;
 
 const array2Oject = function (lines: Array<string>): Object {
-  return lines.reduce(function (object, linep) {
+  return lines.reduce(function (object: any, linep) {
     const line = linep.trim();
     if (line.length === 0) {
       return object;
@@ -23,15 +23,15 @@ const array2Oject = function (lines: Array<string>): Object {
 };
 
 
-const extractResult = function (result) {
+const extractResult = function (result: any) {
 
   const extracterArray = [
     {
       re: / build /,
-      run: function (resultp) {
+      run: function (resultp: any) {
         const lines = resultp.raw.split(os.EOL);
 
-        lines.forEach(function (line) {
+        lines.forEach(function (line: any) {
           const re = /Successfully built (.*)$/;
           const str = line;
           let m;
@@ -54,7 +54,7 @@ const extractResult = function (result) {
     },
     {
       re: / run /,
-      run: function (resultp) {
+      run: function (resultp: any) {
         resultp.containerId = resultp.raw.trim();
 
 
@@ -63,7 +63,7 @@ const extractResult = function (result) {
     },
     {
       re: / ps /,
-      run: function (resultp) {
+      run: function (resultp: any) {
         const lines = resultp.raw.split(os.EOL);
 
         resultp.containerList = cliTable2Json(lines);
@@ -73,7 +73,7 @@ const extractResult = function (result) {
     },
     {
       re: / images /,
-      run: function (resultp) {
+      run: function (resultp: any) {
         const lines = resultp.raw.split(os.EOL);
 
         //const debug = require('debug')('docker-cli-js:lib/index.js extractResult images');
@@ -85,7 +85,7 @@ const extractResult = function (result) {
     },
     {
       re: / network ls /,
-      run: function (resultp) {
+      run: function (resultp: any) {
         const lines = resultp.raw.split(os.EOL);
 
         //const debug = require('debug')('docker-cli-js:lib/index.js extractResult images');
@@ -97,7 +97,7 @@ const extractResult = function (result) {
     },
     {
       re: / inspect /,
-      run: function (resultp) {
+      run: function (resultp: any) {
         const object = JSON.parse(resultp.raw);
 
         resultp.object = object;
@@ -107,7 +107,7 @@ const extractResult = function (result) {
     },
     {
       re: / info /,
-      run: function (resultp) {
+      run: function (resultp: any) {
         const lines = resultp.raw.split(os.EOL);
         resultp.object = array2Oject(lines);
 
@@ -140,11 +140,11 @@ const extractResult = function (result) {
 export class Docker {
 
   constructor(private options: IOptions = {
-    currentWorkingDirectory: null,
-    machineName: null,
+    currentWorkingDirectory: undefined,
+    machineName: undefined,
     }) { }
 
-  public command(command: string, callback?: (err, data) => void) {
+  public command(command: string, callback?: (err: any, data: any) => void) {
     let docker = this;
     let execCommand = 'docker ';
     let machineconfig = '';

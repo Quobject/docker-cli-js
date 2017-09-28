@@ -40,8 +40,8 @@ test('docker-cli-js', t => {
   t.test('build', t => {
 
     const options = new Options(
-      /* machineName */ null,
-      /* currentWorkingDirectory */ path.join(__dirname, '..', 'test', 'nginx')
+      /* machineName */ undefined,
+      /* currentWorkingDirectory */ path.join(__dirname, '..', 'test', 'nginx'),
     );
 
     let docker = new Docker(options);
