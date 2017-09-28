@@ -179,7 +179,6 @@ export class Docker {
         exec(execCommand, execOptions, function(error, stdout, stderr) {
           if (error) {
             const message = `error: '${error}' stdout = '${stdout}' stderr = '${stderr}'`;
-            console.error(message);
             reject(message);
           }
           //need to wrap stdout in object
