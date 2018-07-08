@@ -3,9 +3,6 @@
 import test = require('blue-tape');
 import * as path from 'path';
 import { Docker, Options } from './index';
-const config = require('../my_config.json');
-
-console.log('config', config);
 
 test('docker-cli-js', t => {
 
@@ -20,22 +17,6 @@ test('docker-cli-js', t => {
     });
 
   });
-
-  //t.test('info', t => {
-  //  const options = new Options(
-  //    /* machineName */ 'machinename',
-  //    /* currentWorkingDirectory */ null
-  //  );
-
-  //  let docker = new Docker(options);
-
-  //  return docker.command('info').then(function (data) {
-  //    console.log(data);
-  //    t.ok(data);
-  //    t.ok(data.object.server_version);
-  //  });
-
-  //});
 
   t.test('build', t => {
 
