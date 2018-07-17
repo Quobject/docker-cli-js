@@ -8,11 +8,11 @@
     "dist/"
   ],
   "scripts": {
-    "lint": "tslint src/**/*.ts",
+    "lint": "tslint \"src/**/*.ts\"",
     "build": "rimraf dist/ && tsc",
     "test-spec": "ts-node node_modules/blue-tape/bin/blue-tape.js \"src/**/*.spec.ts\" | tap-diff",
     "test": "npm run lint && npm run build && npm run test-spec",
-    "prepublish": "npm run lint && npm run build && rimraf dist/**/*.spec.* "
+    "prepublish": "npm run lint && npm run build && rimraf \"dist/**/*.spec.*\""
   },
   "repository": {
     "type": "git",
@@ -29,21 +29,20 @@
   },
   "homepage": "https://github.com/Quobject/docker-cli-js",
   "devDependencies": {
-    "@types/node": "^7.0.18",
-    "@types/blue-tape": "^0.1.31",
-    "blue-tape": "^0.2.0",
-    "rimraf": "^2.5.2",
-    "tap-diff": "^0.1.1",
-    "ts-node": "^3.0.4",
-    "tslint": "^3.10.2",
-    "typescript": "^2.3.2"
+    "@types/node": "~7.0.18",
+    "@types/blue-tape": "~0.1.31",
+    "blue-tape": "~0.2.0",
+    "rimraf": "~2.5.2",
+    "tap-diff": "~0.1.1",
+    "ts-node": "~3.0.4",
+    "tslint": "~3.10.2",
+    "typescript": "~2.3.2"
   },
   "dependencies": {
-   
-    "@types/lodash": "^4.14.76",
-    "cli-table-2-json": "^1.0.8",
-    "dockermachine-cli-js": "^3.0.2",
-    "lodash": "^4.12.0",
-    "nodeify-ts": "^1.0.1"
+    "@types/lodash": "~4.14.76",
+    "cli-table-2-json": "~1.0.8",
+    "dockermachine-cli-js": "~3.0.2",
+    "lodash": "~4.12.0",
+    "nodeify-ts": "~1.0.1"
   }
 }

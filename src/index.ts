@@ -1,10 +1,13 @@
-﻿import * as _ from 'lodash';
+import * as _ from 'lodash';
 import * as child_process from 'child_process';
-import * as os from 'os';
 import nodeify from 'nodeify-ts';
 import { cliTable2Json } from 'cli-table-2-json';
 import { DockerMachine } from 'dockermachine-cli-js';
 const exec = child_process.exec;
+
+const splitLines = function (input: string): Array<string> {
+  return input.replace(/\r/g, '').split('\n');
+};
 
 const array2Oject = function (lines: Array<string>): Object {
   return lines.reduce(function (object: any, linep) {
@@ -29,7 +32,7 @@ const extractResult = function (result: any) {
     {
       re: / build /,
       run: function (resultp: any) {
-        const lines = resultp.raw.split(os.EOL);
+        const lines = splitLines(resultp.raw);
 
         lines.forEach(function (line: any) {
           const re = /Successfully built (.*)$/;
@@ -64,7 +67,7 @@ const extractResult = function (result: any) {
     {
       re: / ps /,
       run: function (resultp: any) {
-        const lines = resultp.raw.split(os.EOL);
+        const lines = splitLines(resultp.raw);
 
         resultp.containerList = cliTable2Json(lines);
 
@@ -74,7 +77,7 @@ const extractResult = function (result: any) {
     {
       re: / images /,
       run: function (resultp: any) {
-        const lines = resultp.raw.split(os.EOL);
+        const lines = splitLines(resultp.raw);
 
         //const debug = require('debug')('docker-cli-js:lib/index.js extractResult images');
         //debug(lines);
@@ -86,7 +89,7 @@ const extractResult = function (result: any) {
     {
       re: / network ls /,
       run: function (resultp: any) {
-        const lines = resultp.raw.split(os.EOL);
+        const lines = splitLines(resultp.raw);
 
         //const debug = require('debug')('docker-cli-js:lib/index.js extractResult images');
         //debug(lines);
@@ -108,7 +111,7 @@ const extractResult = function (result: any) {
     {
       re: / info /,
       run: function (resultp: any) {
-        const lines = resultp.raw.split(os.EOL);
+        const lines = splitLines(resultp.raw);
         resultp.object = array2Oject(lines);
 
         return resultp;
