@@ -117,9 +117,16 @@ const extractResult = function (result: any) {
         return resultp;
       },
     },
+    {
+      re: / search /,
+      run: function (resultp: any) {
+        const lines = splitLines(resultp.raw);
 
+        resultp.images = cliTable2Json(lines);
 
-
+        return resultp;
+      },
+    },
   ];
 
   extracterArray.forEach(function (extracter) {

@@ -85,4 +85,14 @@ test('docker-cli-js', t => {
     });
   });
 
+  t.test('search', t => {
+
+    let docker = new Docker();
+
+    return docker.command('search nginxcont').then(function (data) {
+      console.log('data = ', data);
+      t.ok(data.images);
+    });
+  });
+
 });

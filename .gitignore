@@ -32,3 +32,6 @@ my_config.json
 .DS_Store
 npm-debug.log
 dist
+
+# IDE Configuration files
+.idea
