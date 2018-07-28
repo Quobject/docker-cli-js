@@ -549,6 +549,35 @@ docker.command('info').then(function (data) {
 //    registry: 'https://index.docker.io/v1/' } }
 ```
 
+* docker search
+
+```js
+docker.command('search nginxcont').then(function (data) {
+  console.log('data = ', data);
+});
+
+// data = {
+//   command: 'docker   search nginxcont ',
+//   raw:
+//     'NAME                         DESCRIPTION         STARS               OFFICIAL            AUTOMATED\nprotonyx76/nginxcontainer                        0                                       \nddavie2323/nginxhelloworld   NGINXContainer      0                                       \n',
+//   images:
+//     [{
+//       name: 'protonyx76/nginxcontainer',
+//       description: '',
+//       stars: '0',
+//       official: '',
+//       automated: ''
+//     },
+//       {
+//         name: 'ddavie2323/nginxhelloworld',
+//         description: 'NGINXContainer',
+//         stars: '0',
+//         official: '',
+//         automated: ''
+//       }]
+// }
+```
+
 ## License
 
 MIT
