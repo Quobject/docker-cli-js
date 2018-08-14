@@ -578,6 +578,29 @@ docker.command('search nginxcont').then(function (data) {
 // }
 ```
 
+* docker login
+
+```js
+docker.command('login -u myusername -p mypassword').then(function (data) {
+  console.log('data = ', data);
+  // Successful login
+ }, function (rejected) {
+ 	console.log('rejected = ', rejected);
+ 	// Failed login
+ });
+
+// data =  { command: 'docker   login -u myusername -p mypassword ',
+//          raw: 'Login Succeeded\n',
+//          login: 'Login Succeeded' }
+
+// rejected =  error: 'Error: Command failed: docker   login -u fakeUsername -p fakePassword 
+//        WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+//        Error response from daemon: Get https://registry-1.docker.io/v2/: unauthorized: incorrect username or password
+//        ' stdout = '' stderr = 'WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+//        Error response from daemon: Get https://registry-1.docker.io/v2/: unauthorized: incorrect username or password
+```
+
+
 ## License
 
 MIT
