@@ -95,4 +95,43 @@ test('docker-cli-js', t => {
     });
   });
 
+  t.test('login success', t => {
+
+    let docker = new Docker();
+
+    // if this these credentials ever fail, they should be replaced with new valid ones.
+    return docker.command('login -u myusername -p mypassword').then(function(data) {
+      console.log('data = ', data);
+
+      // if login succeeds, these tests should pass
+      t.notOk(/error/.test(data));
+      t.ok(data.login);
+    }, function(data) {
+      console.log('data = ', data);
+
+      // if login is rejected, these tests should fail
+      t.notOk(/error/.test(data));
+      t.ok(data.login);
+    });
+  });
+
+  t.test('login fail', t => {
+
+    let docker = new Docker();
+
+    return docker.command('login -u fakeUsername -p fakePassword').then(function (data) {
+      console.log('data = ', data);
+
+      // if login succeeds, these tests should fail
+      t.ok(/error/.test(data));
+      t.notOk(data.login);
+    }, function (data) {
+      console.log('data = ', data);
+
+      // if login is rejected, these tests should pass
+      t.ok(/error/.test(data));
+      t.notOk(data.login);
+    });
+  });
+
 });

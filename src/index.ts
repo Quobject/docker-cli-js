@@ -127,6 +127,14 @@ const extractResult = function (result: any) {
         return resultp;
       },
     },
+    {
+      re: / login /,
+      run: function (resultp: any) {
+        resultp.login = resultp.raw.trim();
+
+        return resultp;
+      },
+    },
   ];
 
   extracterArray.forEach(function (extracter) {
