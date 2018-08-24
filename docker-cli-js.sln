@@ -21,6 +21,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "docker-cli-js", ".", "{D3A3
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "63210"
+		SlnRelativePath = "..\docker-cli-js\"
 	EndProjectSection
 EndProject
 Global
