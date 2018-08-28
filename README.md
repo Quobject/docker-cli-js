@@ -600,6 +600,26 @@ docker.command('login -u myusername -p mypassword').then(function (data) {
 //        Error response from daemon: Get https://registry-1.docker.io/v2/: unauthorized: incorrect username or password
 ```
 
+* docker pull
+
+```js
+docker.command('pull nginx:latest').then(function (data) {
+  console.log('data = ', data);
+  // Successfully pulled image
+ }, function (rejected) {
+ 	console.log('rejected = ', rejected);
+ 	// Failed to pull image
+ });
+
+// data =  { command: 'docker   pull nginx:1.15.2 ',
+//           raw:'1.15.2: Pulling from library/nginx\nDigest: sha256:d85914d547a6c92faa39ce7058bd7529baacab7e0cd4255442b04577c4d1f424\nStatus: Image is up to date for nginx:1.15.2\n',
+//           login: '1.15.2: Pulling from library/nginx\nDigest: sha256:d85914d547a6c92faa39ce7058bd7529baacab7e0cd4255442b04577c4d1f424\nStatus: Image is up to date for nginx:1.15.2' }
+
+// rejected =  error: 'Error: Command failed: docker   pull nginx:999.999.999 
+//      Error response from daemon: manifest for nginx:999.999.999 not found
+//      ' stdout = '' stderr = 'Error response from daemon: manifest for nginx:999.999.999 not found
+```
+
 
 ## License
 
