@@ -165,4 +165,29 @@ test("docker-cli-js", (t) => {
     });
   });
 
+  t.test("push intentionally failed, denied repo access", (t) => {
+
+    const docker = new Docker();
+
+    return docker.command("push nginx").then(function(data) {
+      console.log("data = ", data);
+      t.ok(data.login);
+    }, function(rejected) {
+        console.log("rejected = ", rejected);
+        t.ok(/error/.test(rejected));
+      });
+    });
+
+  t.test("push intentionally failed, local image does not exist", (t) => {
+
+    const docker = new Docker();
+
+    return docker.command("push dmarionertfulthestoncoag").then(function(data) {
+      console.log("data = ", data);
+      t.ok(data.login);
+    }, function(rejected) {
+      console.log("rejected = ", rejected);
+      t.ok(/error/.test(rejected));
+    });
+  });
 });
