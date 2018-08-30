@@ -133,6 +133,22 @@ const extractResult = function(result: any) {
         return resultp;
       },
     },
+    {
+      re: / pull /,
+      run(resultp: any) {
+        resultp.login = resultp.raw.trim();
+
+        return resultp;
+      },
+    },
+    {
+      re: / push /,
+      run(resultp: any) {
+        resultp.login = resultp.raw.trim();
+
+        return resultp;
+      },
+    },
   ];
 
   extracterArray.forEach(function(extracter) {

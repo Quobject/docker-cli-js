@@ -132,4 +132,62 @@ test("docker-cli-js", (t) => {
     });
   });
 
+  t.test("pull latest", (t) => {
+
+    const docker = new Docker();
+
+    return docker.command("pull nginx").then(function(data) {
+      console.log("data = ", data);
+      t.ok(data.login);
+    });
+  });
+
+  t.test("pull specific tag", (t) => {
+
+    const docker = new Docker();
+
+    return docker.command("pull nginx:1.15.2").then(function(data) {
+      console.log("data = ", data);
+      t.ok(data.login);
+    });
+  });
+
+  t.test("pull intentionally failed, invalid image", (t) => {
+
+    const docker = new Docker();
+
+    return docker.command("pull nginx:999.999.999").then(function(data) {
+      console.log("data = ", data);
+      t.notOk(data.login);
+    }, function(rejected) {
+      console.log("rejected = ", rejected);
+      t.ok(/error/.test(rejected));
+    });
+  });
+
+  t.test("push intentionally failed, denied repo access", (t) => {
+
+    const docker = new Docker();
+
+    return docker.command("push nginx").then(function(data) {
+      console.log("data = ", data);
+      t.ok(data.login);
+    }, function(rejected) {
+        console.log("rejected = ", rejected);
+        t.ok(/error/.test(rejected));
+      });
+    });
+
+  t.test("push intentionally failed, local image does not exist", (t) => {
+
+    const docker = new Docker();
+
+    return docker.command("push dmarionertfulthestoncoag").then(function(data) {
+      console.log("data = ", data);
+      t.ok(data.login);
+    }, function(rejected) {
+      console.log("rejected = ", rejected);
+      t.ok(/error/.test(rejected));
+    });
+  });
 });

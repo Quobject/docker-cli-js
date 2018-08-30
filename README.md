@@ -600,6 +600,65 @@ docker.command('login -u myusername -p mypassword').then(function (data) {
 //        Error response from daemon: Get https://registry-1.docker.io/v2/: unauthorized: incorrect username or password
 ```
 
+* docker pull
+
+```js
+docker.command('pull nginx:latest').then(function (data) {
+  console.log('data = ', data);
+  // Successfully pulled image
+ }, function (rejected) {
+ 	console.log('rejected = ', rejected);
+ 	// Failed to pull image
+ });
+
+// data =  { command: 'docker   pull nginx:1.15.2 ',
+//           raw:'1.15.2: Pulling from library/nginx\nDigest: sha256:d85914d547a6c92faa39ce7058bd7529baacab7e0cd4255442b04577c4d1f424\nStatus: Image is up to date for nginx:1.15.2\n',
+//           login: '1.15.2: Pulling from library/nginx\nDigest: sha256:d85914d547a6c92faa39ce7058bd7529baacab7e0cd4255442b04577c4d1f424\nStatus: Image is up to date for nginx:1.15.2' }
+
+// rejected =  error: 'Error: Command failed: docker   pull nginx:999.999.999 
+//      Error response from daemon: manifest for nginx:999.999.999 not found
+//      ' stdout = '' stderr = 'Error response from daemon: manifest for nginx:999.999.999 not found
+```
+
+* docker push
+
+```js
+docker.command('push nginx:latest').then(function (data) {
+  console.log('data = ', data);
+  // Successfully pulled image
+ }, function (rejected) {
+ 	console.log('rejected = ', rejected);
+ 	// Failed to pull image
+ });
+
+// data =  { command: 'docker   push mattsoghoian/test ',
+//          raw:
+//           'The push refers to repository [docker.io/<username>/<repo>]\n08d25fa0442e: Preparing\na8c4aeeaa045: Preparing\ncdb3f9544e4c: Preparing\n08d25fa0442e: Mounted from library/nginx\na8c4aeeaa045: Mounted from library/nginx\ncdb3f9544e4c: Mounted from library/nginx\nlatest: digest: sha256:4ffd9758ea9ea360fd87d0cee7a2d1cf9dba630bb57ca36b3108dcd3708dc189 size: 948\n',
+//          login:
+//           'The push refers to repository [docker.io/<username>/<repo>]\n08d25fa0442e: Preparing\na8c4aeeaa045: Preparing\ncdb3f9544e4c: Preparing\n08d25fa0442e: Mounted from library/nginx\na8c4aeeaa045: Mounted from library/nginx\ncdb3f9544e4c: Mounted from library/nginx\nlatest: digest: sha256:4ffd9758ea9ea360fd87d0cee7a2d1cf9dba630bb57ca36b3108dcd3708dc189 size: 948' }
+
+// rejected =  error: 'Error: Command failed: docker   push nginx 
+//        An image does not exist locally with the tag: nginx
+//        ' stdout = 'The push refers to repository [docker.io/library/nginx]
+//        ' stderr = 'An image does not exist locally with the tag: nginx
+
+// rejected =  error: 'Error: Command failed: docker   push nginx 
+//        errors:
+//        denied: requested access to the resource is denied
+//        unauthorized: authentication required
+//        ' stdout = 'The push refers to repository [docker.io/library/nginx]
+//        08d25fa0442e: Preparing
+//        a8c4aeeaa045: Preparing
+//        cdb3f9544e4c: Preparing
+//        cdb3f9544e4c: Layer already exists
+//        08d25fa0442e: Layer already exists
+//        a8c4aeeaa045: Layer already exists
+//        ' stderr = 'errors:
+//        denied: requested access to the resource is denied
+//        unauthorized: authentication required
+//        '
+```
+
 
 ## License
 
