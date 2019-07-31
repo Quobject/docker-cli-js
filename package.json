@@ -42,7 +42,7 @@
   "dependencies": {
     "cli-table-2-json": "1.0.12",
     "dockermachine-cli-js": "3.0.4",
-    "lodash": "4.17.11",
+    "lodash": "^4.17.15",
     "nodeify-ts": "1.0.6"
   }
 }
