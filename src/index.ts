@@ -208,7 +208,7 @@ export class Docker {
         //console.log('execCommand =', execCommand);
         //console.log('exec options =', execOptions);
 
-        exec(execCommand, execOptions, function(error, stdout, stderr) {
+        const childProcess = exec(execCommand, execOptions, function(error, stdout, stderr) {
           if (error) {
             const message = `error: '${error}' stdout = '${stdout}' stderr = '${stderr}'`;
             reject(message);
@@ -217,6 +217,15 @@ export class Docker {
           //doesn't work otherwise for 'build - t nginximg1 .'
           resolve({ result: stdout});
         });
+
+        childProcess.stdout.on("data", (chunk) => {
+          process.stdout.write( chunk.toString() );
+        });
+
+        childProcess.stderr.on("data", (chunk) => {
+          process.stderr.write( chunk.toString() );
+        });
+
       });
     }).then(function(data: any) {
       //console.log('data:', data);
