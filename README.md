@@ -27,6 +27,23 @@ var Docker = dockerCLI.Docker;
 
 ## Usage
 
+### Modern JS - direct call
+
+```js
+// esm
+import { dockerCommand } from 'docker-cli-js';
+
+// options are optional, defaults below
+const options = {
+  /* machineName */ null,
+  /* currentWorkingDirectory */ process.cwd(),
+  /* echo*/ true,
+};
+
+...
+  const data = await dockerCommand('build -t nginximg .', options);
+```
+
 ### With promise
 
 ```js
