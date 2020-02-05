@@ -32,7 +32,8 @@ var Docker = dockerCLI.Docker;
 ```js
    var options = new DockerOptions(
     /* machinename */ 'aws_machine01',
-    /* currentWorkingDirectory */ 'nginx'
+    /* currentWorkingDirectory */ 'nginx',
+    /* echo */ true,
    );    
 
    var docker = new Docker(options);
@@ -130,7 +131,8 @@ import { Docker, Options } from 'docker-cli-js';
 
 const options = new Options(
   /* machineName */ null,
-  /* currentWorkingDirectory */ path.join(__dirname, '..', 'test', 'nginx')
+  /* currentWorkingDirectory */ path.join(__dirname, '..', 'test', 'nginx'),
+  /* echo*/ true,
 );
 
 let docker = new Docker(options);

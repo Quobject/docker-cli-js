@@ -173,6 +173,7 @@ export class Docker {
 
   constructor(private options: IOptions = {
     currentWorkingDirectory: undefined,
+    echo: true,
     machineName: undefined,
     }) { }
 
@@ -218,13 +219,15 @@ export class Docker {
           resolve({ result: stdout});
         });
 
-        childProcess.stdout.on("data", (chunk) => {
-          process.stdout.write( chunk.toString() );
-        });
+        if (docker.options.echo) {
+          childProcess.stdout.on("data", (chunk) => {
+            process.stdout.write( chunk.toString() );
+          });
 
-        childProcess.stderr.on("data", (chunk) => {
-          process.stderr.write( chunk.toString() );
-        });
+          childProcess.stderr.on("data", (chunk) => {
+            process.stderr.write( chunk.toString() );
+          });
+        }
 
       });
     }).then(function(data: any) {
@@ -244,8 +247,9 @@ export class Docker {
 export interface IOptions {
   machineName?: string;
   currentWorkingDirectory?: string;
+  echo?: boolean;
 }
 
 export class Options implements IOptions {
-  public constructor(public machineName?: string, public currentWorkingDirectory?: string) { }
+  public constructor(public machineName?: string, public currentWorkingDirectory?: string, public echo: boolean = true) { }
 }
