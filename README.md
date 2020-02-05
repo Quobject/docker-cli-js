@@ -31,17 +31,16 @@ var Docker = dockerCLI.Docker;
 
 ```js
 // esm
-import { dockerCommand } from 'docker-cli-js';
+const { dockerCommand } = require('docker-cli-js');
 
-// options are optional, defaults below
+// default options
 const options = {
   macineName: null, // uses local docker
   currentWorkingDirectory: null, // uses current working directory
   echo: true, // echo command output to stdout/stderr
 };
 
-...
-  const data = await dockerCommand('build -t nginximg .', options);
+const data = await dockerCommand('build -t nginximg .', options);
 ```
 
 ### With promise

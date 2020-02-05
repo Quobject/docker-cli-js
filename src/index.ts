@@ -196,13 +196,22 @@ export const dockerCommand = async (
   };
 
   const raw = await new Promise((resolve, reject) => {
-    const childProcess = exec(execCommand, execOptions, (error, stdout, stderr) => {
-      if (error) {
-        return reject(Object.assign(error, { stdout, stderr }));
-      }
+    const childProcess = exec(
+      execCommand,
+      execOptions,
+      (error, stdout, stderr) => {
+        if (error) {
+          return reject(
+            Object.assign(
+              new Error(`Error: stdout ${stdout}, stderr ${stderr}`),
+              { ...error, stdout, stderr, innerError: error }
+            )
+          );
+        }
 
-      resolve(stdout);
-    });
+        resolve(stdout);
+      }
+    );
 
     if (options.echo) {
       childProcess.stdout.on("data", chunk => {
