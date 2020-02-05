@@ -35,9 +35,9 @@ import { dockerCommand } from 'docker-cli-js';
 
 // options are optional, defaults below
 const options = {
-  /* machineName */ null,
-  /* currentWorkingDirectory */ process.cwd(),
-  /* echo*/ true,
+  macineName: null, // uses local docker
+  currentWorkingDirectory: null, // uses current working directory
+  echo: true, // echo command output to stdout/stderr
 };
 
 ...
