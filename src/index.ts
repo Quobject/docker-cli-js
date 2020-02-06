@@ -1,7 +1,8 @@
 import * as child_process from "child_process";
 import { cliTable2Json } from "cli-table-2-json";
 import { DockerMachine } from "dockermachine-cli-js";
-import * as _ from "lodash";
+//import * as _ from "lodash";
+const snakeCase = require("lodash.snakecase");
 import nodeify from "nodeify-ts";
 const exec = child_process.exec;
 
@@ -19,7 +20,7 @@ const array2Oject = function(lines: string[]): any {
     const parts = line.split(":");
     let key = parts[0];
     const value = parts.slice(1).join(":");
-    key = _.snakeCase(key);
+    key = snakeCase(key);
     object[key] = value.trim();
     return object;
   }, {});
@@ -51,7 +52,7 @@ const extractResult = function(result: any) {
         resultp.response = lines;
 
         return resultp;
-      }
+      },
     },
     {
       re: / run /,
@@ -59,7 +60,7 @@ const extractResult = function(result: any) {
         resultp.containerId = resultp.raw.trim();
 
         return resultp;
-      }
+      },
     },
     {
       re: / ps /,
@@ -69,7 +70,7 @@ const extractResult = function(result: any) {
         resultp.containerList = cliTable2Json(lines);
 
         return resultp;
-      }
+      },
     },
     {
       re: / images /,
@@ -81,7 +82,7 @@ const extractResult = function(result: any) {
         resultp.images = cliTable2Json(lines);
 
         return resultp;
-      }
+      },
     },
     {
       re: / network ls /,
@@ -93,7 +94,7 @@ const extractResult = function(result: any) {
         resultp.network = cliTable2Json(lines);
 
         return resultp;
-      }
+      },
     },
     {
       re: / inspect /,
@@ -103,7 +104,7 @@ const extractResult = function(result: any) {
         resultp.object = object;
 
         return resultp;
-      }
+      },
     },
     {
       re: / info /,
@@ -112,7 +113,7 @@ const extractResult = function(result: any) {
         resultp.object = array2Oject(lines);
 
         return resultp;
-      }
+      },
     },
     {
       re: / search /,
@@ -122,7 +123,7 @@ const extractResult = function(result: any) {
         resultp.images = cliTable2Json(lines);
 
         return resultp;
-      }
+      },
     },
     {
       re: / login /,
@@ -130,7 +131,7 @@ const extractResult = function(result: any) {
         resultp.login = resultp.raw.trim();
 
         return resultp;
-      }
+      },
     },
     {
       re: / pull /,
@@ -138,7 +139,7 @@ const extractResult = function(result: any) {
         resultp.login = resultp.raw.trim();
 
         return resultp;
-      }
+      },
     },
     {
       re: / push /,
@@ -146,14 +147,14 @@ const extractResult = function(result: any) {
         resultp.login = resultp.raw.trim();
 
         return resultp;
-      }
-    }
+      },
+    },
   ];
 
   extracterArray.forEach(function(extracter) {
     const re = extracter.re;
     const str = result.command;
-    const m = re.exec(str);
+    const m = re.exec(str + " ");
 
     if (m !== null) {
       if (m.index === re.lastIndex) {
@@ -173,15 +174,15 @@ export const dockerCommand = async (
   options: IOptions = {
     currentWorkingDirectory: undefined,
     echo: true,
-    machineName: undefined
-  }
+    machineName: undefined,
+  },
 ) => {
   let machineconfig = "";
 
   if (options.machineName) {
     machineconfig = await new DockerMachine()
       .command(`config ${options.machineName}`)
-      .then(data => data.machine.config);
+      .then((data) => data.machine.config);
   }
 
   const execCommand = `docker ${machineconfig} ${command}`;
@@ -190,9 +191,9 @@ export const dockerCommand = async (
     env: {
       DEBUG: "",
       HOME: process.env.HOME,
-      PATH: process.env.PATH
+      PATH: process.env.PATH,
     },
-    maxBuffer: 200 * 1024 * 1024
+    maxBuffer: 200 * 1024 * 1024,
   };
 
   const raw = await new Promise((resolve, reject) => {
@@ -204,21 +205,21 @@ export const dockerCommand = async (
           return reject(
             Object.assign(
               new Error(`Error: stdout ${stdout}, stderr ${stderr}`),
-              { ...error, stdout, stderr, innerError: error }
-            )
+              { ...error, stdout, stderr, innerError: error },
+            ),
           );
         }
 
         resolve(stdout);
-      }
+      },
     );
 
     if (options.echo) {
-      childProcess.stdout.on("data", chunk => {
+      childProcess.stdout.on("data", (chunk) => {
         process.stdout.write(chunk.toString());
       });
 
-      childProcess.stderr.on("data", chunk => {
+      childProcess.stderr.on("data", (chunk) => {
         process.stderr.write(chunk.toString());
       });
     }
@@ -226,7 +227,7 @@ export const dockerCommand = async (
 
   return extractResult({
     command: execCommand,
-    raw
+    raw,
   });
 };
 
@@ -235,8 +236,8 @@ export class Docker {
     private options: IOptions = {
       currentWorkingDirectory: undefined,
       echo: true,
-      machineName: undefined
-    }
+      machineName: undefined,
+    },
   ) {}
 
   public command(command: string, callback?: (err: any, data: any) => void) {
@@ -254,6 +255,6 @@ export class Options implements IOptions {
   public constructor(
     public machineName?: string,
     public currentWorkingDirectory?: string,
-    public echo: boolean = true
+    public echo: boolean = true,
   ) {}
 }

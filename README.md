@@ -1,9 +1,6 @@
 # docker-cli-js
 A node.js wrapper for the docker command line tool
 
-[![NPM](https://nodei.co/npm/docker-cli-js.png?downloads=true&downloadRank=true)](https://nodei.co/npm/docker-cli-js/)
-[![NPM](https://nodei.co/npm-dl/docker-cli-js.png?months=6&height=3)](https://nodei.co/npm/docker-cli-js/)
-
 [![NPM version][npm-image]][npm-url]
 [![NPM downloads][downloads-image]][downloads-url]
 

@@ -1,6 +1,6 @@
 {
   "name": "docker-cli-js",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "description": "A node.js wrapper for the docker command line interface CLI",
   "main": "dist/index.js",
   "typings": "dist/index",
@@ -8,7 +8,8 @@
     "dist/"
   ],
   "scripts": {
-    "lint": "tslint \"src/**/*.ts\"",
+    "lint": "tslint --project .",
+    "lintfix": "tslint --project . --fix",
     "build": "rimraf dist/ && tsc",
     "test-spec": "ts-node node_modules/blue-tape/bin/blue-tape.js \"src/**/*.spec.ts\" | tap-diff",
     "test": "npm run lint && npm run build && npm run test-spec",
@@ -42,7 +43,7 @@
   "dependencies": {
     "cli-table-2-json": "1.0.13",
     "dockermachine-cli-js": "3.0.5",
-    "lodash": "^4.17.15",
+    "lodash.snakecase": "^4.1.1",
     "nodeify-ts": "1.0.6"
   }
 }
