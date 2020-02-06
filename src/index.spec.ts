@@ -3,9 +3,29 @@
 import test = require("blue-tape");
 import * as path from "path";
 import { Docker, Options } from "./index";
+const { dockerCommand } = require("./index");
+
+test("docker-cli-js dockerCommand", (t) => {
+
+  t.test("info", (t) => {
+
+    const options = {
+      currentWorkingDirectory: null, // uses current working directory
+      echo: true, // echo command output to stdout/stderr
+      macineName: null, // uses local docker
+    };
+
+    return dockerCommand("info", options).then(function(data) {
+      //console.log("data", data);
+      //console.log("data.object", data.object);
+      t.ok(data);
+      t.ok(data.object.server_version);
+    });
+
+  });
+});
 
 test("docker-cli-js", (t) => {
-
   t.test("info", (t) => {
     const docker = new Docker();
 
