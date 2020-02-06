@@ -27,12 +27,29 @@ var Docker = dockerCLI.Docker;
 
 ## Usage
 
+### Modern JS - direct call
+
+```js
+// esm
+const { dockerCommand } = require('docker-cli-js');
+
+// default options
+const options = {
+  macineName: null, // uses local docker
+  currentWorkingDirectory: null, // uses current working directory
+  echo: true, // echo command output to stdout/stderr
+};
+
+const data = await dockerCommand('build -t nginximg .', options);
+```
+
 ### With promise
 
 ```js
    var options = new DockerOptions(
     /* machinename */ 'aws_machine01',
-    /* currentWorkingDirectory */ 'nginx'
+    /* currentWorkingDirectory */ 'nginx',
+    /* echo */ true,
    );    
 
    var docker = new Docker(options);
@@ -130,7 +147,8 @@ import { Docker, Options } from 'docker-cli-js';
 
 const options = new Options(
   /* machineName */ null,
-  /* currentWorkingDirectory */ path.join(__dirname, '..', 'test', 'nginx')
+  /* currentWorkingDirectory */ path.join(__dirname, '..', 'test', 'nginx'),
+  /* echo*/ true,
 );
 
 let docker = new Docker(options);

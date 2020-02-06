@@ -26,7 +26,6 @@ const array2Oject = function(lines: string[]): any {
 };
 
 const extractResult = function(result: any) {
-
   const extracterArray = [
     {
       re: / build /,
@@ -52,7 +51,7 @@ const extractResult = function(result: any) {
         resultp.response = lines;
 
         return resultp;
-      },
+      }
     },
     {
       re: / run /,
@@ -60,7 +59,7 @@ const extractResult = function(result: any) {
         resultp.containerId = resultp.raw.trim();
 
         return resultp;
-      },
+      }
     },
     {
       re: / ps /,
@@ -70,7 +69,7 @@ const extractResult = function(result: any) {
         resultp.containerList = cliTable2Json(lines);
 
         return resultp;
-      },
+      }
     },
     {
       re: / images /,
@@ -82,7 +81,7 @@ const extractResult = function(result: any) {
         resultp.images = cliTable2Json(lines);
 
         return resultp;
-      },
+      }
     },
     {
       re: / network ls /,
@@ -94,7 +93,7 @@ const extractResult = function(result: any) {
         resultp.network = cliTable2Json(lines);
 
         return resultp;
-      },
+      }
     },
     {
       re: / inspect /,
@@ -104,7 +103,7 @@ const extractResult = function(result: any) {
         resultp.object = object;
 
         return resultp;
-      },
+      }
     },
     {
       re: / info /,
@@ -113,7 +112,7 @@ const extractResult = function(result: any) {
         resultp.object = array2Oject(lines);
 
         return resultp;
-      },
+      }
     },
     {
       re: / search /,
@@ -123,7 +122,7 @@ const extractResult = function(result: any) {
         resultp.images = cliTable2Json(lines);
 
         return resultp;
-      },
+      }
     },
     {
       re: / login /,
@@ -131,7 +130,7 @@ const extractResult = function(result: any) {
         resultp.login = resultp.raw.trim();
 
         return resultp;
-      },
+      }
     },
     {
       re: / pull /,
@@ -139,7 +138,7 @@ const extractResult = function(result: any) {
         resultp.login = resultp.raw.trim();
 
         return resultp;
-      },
+      }
     },
     {
       re: / push /,
@@ -147,8 +146,8 @@ const extractResult = function(result: any) {
         resultp.login = resultp.raw.trim();
 
         return resultp;
-      },
-    },
+      }
+    }
   ];
 
   extracterArray.forEach(function(extracter) {
@@ -169,83 +168,92 @@ const extractResult = function(result: any) {
   return result;
 };
 
-export class Docker {
-
-  constructor(private options: IOptions = {
+export const dockerCommand = async (
+  command: string,
+  options: IOptions = {
     currentWorkingDirectory: undefined,
-    machineName: undefined,
-    }) { }
+    echo: true,
+    machineName: undefined
+  }
+) => {
+  let machineconfig = "";
+
+  if (options.machineName) {
+    machineconfig = await new DockerMachine()
+      .command(`config ${options.machineName}`)
+      .then(data => data.machine.config);
+  }
+
+  const execCommand = `docker ${machineconfig} ${command}`;
+  const execOptions = {
+    cwd: options.currentWorkingDirectory,
+    env: {
+      DEBUG: "",
+      HOME: process.env.HOME,
+      PATH: process.env.PATH
+    },
+    maxBuffer: 200 * 1024 * 1024
+  };
+
+  const raw = await new Promise((resolve, reject) => {
+    const childProcess = exec(
+      execCommand,
+      execOptions,
+      (error, stdout, stderr) => {
+        if (error) {
+          return reject(
+            Object.assign(
+              new Error(`Error: stdout ${stdout}, stderr ${stderr}`),
+              { ...error, stdout, stderr, innerError: error }
+            )
+          );
+        }
+
+        resolve(stdout);
+      }
+    );
+
+    if (options.echo) {
+      childProcess.stdout.on("data", chunk => {
+        process.stdout.write(chunk.toString());
+      });
+
+      childProcess.stderr.on("data", chunk => {
+        process.stderr.write(chunk.toString());
+      });
+    }
+  });
+
+  return extractResult({
+    command: execCommand,
+    raw
+  });
+};
+
+export class Docker {
+  constructor(
+    private options: IOptions = {
+      currentWorkingDirectory: undefined,
+      echo: true,
+      machineName: undefined
+    }
+  ) {}
 
   public command(command: string, callback?: (err: any, data: any) => void) {
-    const docker = this;
-    let execCommand = "docker ";
-    let machineconfig = "";
-
-    const promise = Promise.resolve().then(function() {
-      if (docker.options.machineName) {
-
-        const dockerMachine = new DockerMachine();
-
-        return dockerMachine.command("config " + docker.options.machineName).then(function(data) {
-          //console.log('data = ', data);
-          machineconfig = data.machine.config;
-        });
-      }
-    }).then(function() {
-      execCommand += " " + machineconfig + " " + command + " ";
-
-      const execOptions = {
-        cwd: docker.options.currentWorkingDirectory,
-        env: {
-          DEBUG: "",
-          HOME: process.env.HOME,
-          PATH: process.env.PATH,
-        },
-        maxBuffer: 200 * 1024 * 1024,
-      };
-
-      return new Promise(function(resolve, reject) {
-        //console.log('execCommand =', execCommand);
-        //console.log('exec options =', execOptions);
-
-        const childProcess = exec(execCommand, execOptions, function(error, stdout, stderr) {
-          if (error) {
-            const message = `error: '${error}' stdout = '${stdout}' stderr = '${stderr}'`;
-            reject(message);
-          }
-          //need to wrap stdout in object
-          //doesn't work otherwise for 'build - t nginximg1 .'
-          resolve({ result: stdout});
-        });
-
-        childProcess.stdout.on("data", (chunk) => {
-          process.stdout.write( chunk.toString() );
-        });
-
-        childProcess.stderr.on("data", (chunk) => {
-          process.stderr.write( chunk.toString() );
-        });
-
-      });
-    }).then(function(data: any) {
-      //console.log('data:', data);
-      const result = {
-        command: execCommand,
-        raw: data.result,
-      };
-      return extractResult(result);
-
-    });
-
-    return nodeify(promise, callback);
+    return nodeify(dockerCommand(command, this.options), callback);
   }
 }
 
 export interface IOptions {
   machineName?: string;
   currentWorkingDirectory?: string;
+  echo?: boolean;
 }
 
 export class Options implements IOptions {
-  public constructor(public machineName?: string, public currentWorkingDirectory?: string) { }
+  public constructor(
+    public machineName?: string,
+    public currentWorkingDirectory?: string,
+    public echo: boolean = true
+  ) {}
 }
