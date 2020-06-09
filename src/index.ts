@@ -26,7 +26,7 @@ const array2Oject = function(lines: string[]): any {
   }, {});
 };
 
-const extractResult = function(result: any) {
+const extractResult = function(result: ExtractResultInterface) {
   const extracterArray = [
     {
       re: / build /,
@@ -249,6 +249,11 @@ export interface IOptions {
   machineName?: string;
   currentWorkingDirectory?: string;
   echo?: boolean;
+}
+
+export interface ExtractResultInterface {
+  command: string;
+  raw: any;
 }
 
 export class Options implements IOptions {
