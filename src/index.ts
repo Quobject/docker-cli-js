@@ -174,6 +174,7 @@ export const dockerCommand = async (
   options: IOptions = {
     currentWorkingDirectory: undefined,
     echo: true,
+    env: undefined,
     machineName: undefined,
   },
 ) => {
@@ -192,6 +193,7 @@ export const dockerCommand = async (
       DEBUG: "",
       HOME: process.env.HOME,
       PATH: process.env.PATH,
+      ...options.env,
     },
     maxBuffer: 200 * 1024 * 1024,
   };
@@ -236,6 +238,7 @@ export class Docker {
     private options: IOptions = {
       currentWorkingDirectory: undefined,
       echo: true,
+      env: undefined,
       machineName: undefined,
     },
   ) {}
@@ -249,6 +252,7 @@ export interface IOptions {
   machineName?: string;
   currentWorkingDirectory?: string;
   echo?: boolean;
+  env?: NodeJS.ProcessEnv;
 }
 
 export class Options implements IOptions {
@@ -256,5 +260,6 @@ export class Options implements IOptions {
     public machineName?: string,
     public currentWorkingDirectory?: string,
     public echo: boolean = true,
+    public env?: NodeJS.ProcessEnv,
   ) {}
 }
