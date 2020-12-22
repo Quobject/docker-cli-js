@@ -1,6 +1,6 @@
 {
   "name": "docker-cli-js",
-  "version": "2.7.1",
+  "version": "2.8.0",
   "description": "A node.js wrapper for the docker command line interface CLI",
   "main": "dist/index.js",
   "typings": "dist/index",
