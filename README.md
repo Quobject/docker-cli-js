@@ -8,7 +8,7 @@ A node.js wrapper for the docker command line tool
 
 ### Warning
 
-Warning: code uses exec = child_process.exec; https://github.com/Quobject/docker-cli-js/issues/22
+Code uses exec = child_process.exec; https://github.com/Quobject/docker-cli-js/issues/22
 
 ### Step 1: Prerequisites
 
