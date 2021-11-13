@@ -6,6 +6,10 @@ A node.js wrapper for the docker command line tool
 
 ## Installation
 
+### Warning
+
+Warning: code uses exec = child_process.exec; https://github.com/Quobject/docker-cli-js/issues/22
+
 ### Step 1: Prerequisites
 
 The docker command line tool must be installed and accessible in the path
