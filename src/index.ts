@@ -219,6 +219,7 @@ export const dockerCommand = async (
 
     if (options.stdin) {
       childProcess.stdin.write(options.stdin);
+      childProcess.stdin.end();
     }
 
     if (options.echo) {
