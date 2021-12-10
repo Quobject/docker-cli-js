@@ -176,6 +176,7 @@ export const dockerCommand = async (
     echo: true,
     env: undefined,
     machineName: undefined,
+    stdin: undefined
   },
 ) => {
   let machineconfig = "";
@@ -216,6 +217,10 @@ export const dockerCommand = async (
       },
     );
 
+    if (options.stdin) {
+      childProcess.stdin.write(options.stdin);
+    }
+
     if (options.echo) {
       childProcess.stdout.on("data", (chunk) => {
         process.stdout.write(chunk.toString());
@@ -240,6 +245,7 @@ export class Docker {
       echo: true,
       env: undefined,
       machineName: undefined,
+      stdin: undefined
     },
   ) {}
 
@@ -253,6 +259,7 @@ export interface IOptions {
   currentWorkingDirectory?: string;
   echo?: boolean;
   env?: NodeJS.ProcessEnv;
+  stdin?: string;
 }
 
 export class Options implements IOptions {
@@ -261,5 +268,6 @@ export class Options implements IOptions {
     public currentWorkingDirectory?: string,
     public echo: boolean = true,
     public env?: NodeJS.ProcessEnv,
+    public stdin?: string,
   ) {}
 }
