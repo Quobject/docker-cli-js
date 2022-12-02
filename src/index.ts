@@ -194,6 +194,7 @@ export const dockerCommand = async (
       DEBUG: "",
       HOME: process.env.HOME,
       PATH: process.env.PATH,
+      USER: process.env.USER,
       ...options.env,
     },
     maxBuffer: 200 * 1024 * 1024,
