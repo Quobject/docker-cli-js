@@ -176,7 +176,7 @@ export const dockerCommand = async (
     echo: true,
     env: undefined,
     machineName: undefined,
-    stdin: undefined
+    stdin: undefined,
   },
 ) => {
   let machineconfig = "";
@@ -246,7 +246,7 @@ export class Docker {
       echo: true,
       env: undefined,
       machineName: undefined,
-      stdin: undefined
+      stdin: undefined,
     },
   ) {}
 
