@@ -176,7 +176,7 @@ export const dockerCommand = async (
     echo: true,
     env: undefined,
     machineName: undefined,
-    stdin: undefined
+    stdin: undefined,
   },
 ) => {
   let machineconfig = "";
@@ -194,6 +194,7 @@ export const dockerCommand = async (
       DEBUG: "",
       HOME: process.env.HOME,
       PATH: process.env.PATH,
+      USER: process.env.USER,
       ...options.env,
     },
     maxBuffer: 200 * 1024 * 1024,
@@ -246,7 +247,7 @@ export class Docker {
       echo: true,
       env: undefined,
       machineName: undefined,
-      stdin: undefined
+      stdin: undefined,
     },
   ) {}
 
