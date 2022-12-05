@@ -11,6 +11,7 @@
     "lint": "tslint --project .",
     "lintfix": "tslint --project . --fix",
     "build": "rimraf dist/ && tsc",
+    "prepare": "npm run build",
     "test-spec": "ts-node node_modules/blue-tape/bin/blue-tape.js \"src/**/*.spec.ts\" | tap-diff",
     "test": "npm run lint && npm run build && npm run test-spec",
     "prepublish": "npm run lint && npm run build && rimraf \"dist/**/*.spec.*\""
