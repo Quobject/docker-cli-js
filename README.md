@@ -28,6 +28,16 @@ var Docker = dockerCLI.Docker;
 
 ## Usage
 
+### DockerCLI Options
+
+| Option                    | Type                | Description                                                       |
+| ------------------------- | ------------------- | ----------------------------------------------------------------- |
+| `machineName`             | `string`            | The name of the Docker machine.                                   |
+| `currentWorkingDirectory` | `string`            | The current working directory where Docker commands are executed. |
+| `echo`                    | `boolean`           | If true, the Docker commands are echoed to the console.           |
+| `env`                     | `NodeJS.ProcessEnv` | The environment variables for the Docker process.                 |
+| `stdin`                   | `string`            | The standard input for the Docker process.                        |
+
 ### Modern JS - direct call
 
 ```js
@@ -39,6 +49,8 @@ const options = {
   machineName: null, // uses local docker
   currentWorkingDirectory: null, // uses current working directory
   echo: true, // echo command output to stdout/stderr
+  env: null, // environment variables
+  stdin: null, // stdin used for the command (useful for passing passwords, etc)
 };
 
 const data = await dockerCommand('build -t nginximg .', options);
@@ -599,8 +611,10 @@ docker.command('search nginxcont').then(function (data) {
 
 * docker login
 
+Please use **--password-stdin** for **secure** login
+
 ```js
-docker.command('login -u myusername -p mypassword').then(function (data) {
+docker.command('login -u myusername --password-stdin').then(function (data) {
   console.log('data = ', data);
   // Successful login
  }, function (rejected) {
@@ -608,7 +622,7 @@ docker.command('login -u myusername -p mypassword').then(function (data) {
  	// Failed login
  });
 
-// data =  { command: 'docker   login -u myusername -p mypassword ',
+// data =  { command: 'docker   login -u myusername --password-stdin ',
 //          raw: 'Login Succeeded\n',
 //          login: 'Login Succeeded' }
 
